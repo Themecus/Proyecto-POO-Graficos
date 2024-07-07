@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carpeta.proyectopoograficos.EscenaEstadisticaControlador">
+   <children>
+      <Button fx:id="btoVolver" layoutX="274.0" layoutY="336.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
+      <TreeTableView layoutX="9.0" layoutY="174.0" prefHeight="147.0" prefWidth="472.0">
+        <columns>
+            <TreeTableColumn fx:id="colum1" prefWidth="75.0" text="0-9" />
+          <TreeTableColumn fx:id="colum2" prefWidth="75.0" text="Toma 2" />
+          <TreeTableColumn fx:id="colum3" prefWidth="75.0" text="Reversa" />
+            <TreeTableColumn fx:id="colum4" prefWidth="96.19996643066406" text="Pierde turno" />
+            <TreeTableColumn fx:id="colum5" prefWidth="91.39996337890625" text="Cambio color" />
+            <TreeTableColumn fx:id="colum6" prefWidth="55.99998779296874" text="Toma 4" />
+        </columns>
+      </TreeTableView>
+
+       <TreeTableView layoutX="9.0" layoutY="3.0" prefHeight="137.0" prefWidth="472.0">
+           <columns>
+               <TreeTableColumn fx:id="colum7" prefWidth="75.0" text="0-9" />
+               <TreeTableColumn fx:id="colum8" prefWidth="75.0" text="Toma 2" />
+               <TreeTableColumn fx:id="colum9" prefWidth="75.0" text="Reversa" />
+               <TreeTableColumn fx:id="colum10" prefWidth="96.19996643066406" text="Pierde turno" />
+               <TreeTableColumn fx:id="colum11" prefWidth="91.39996337890625" text="Cambio color" />
+               <TreeTableColumn fx:id="colum12" prefWidth="55.99998779296874" text="Toma 4" />
+           </columns>
+       </TreeTableView>
+      <Label alignment="CENTER" contentDisplay="TOP" layoutX="488.0" layoutY="5.0" prefHeight="18.0" prefWidth="66.0" text="JUGADOR" />
+      <Label alignment="CENTER" layoutX="507.0" layoutY="183.0" text="RIVAL" />
+   </children>
+</AnchorPane>

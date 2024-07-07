@@ -30,9 +30,19 @@ public class Main extends Application {
         //Menu acceder2= new Menu();
         //acceder2.menu();
 
-        Parent secondaryRoot = FXMLLoader.load(getClass().getResource("EscenaJuego.fxml"));
-        Scene secondaryScene = new Scene(secondaryRoot);
-        primaryStage.setScene(secondaryScene);
+        Parent segundoRoot = FXMLLoader.load(getClass().getResource("EscenaJuego.fxml"));
+        Scene segundoScene = new Scene(segundoRoot);
+        primaryStage.setScene(segundoScene);
+        primaryStage.setTitle("UNO");
+        primaryStage.setFullScreen(true);
+        primaryStage.show();
+    }
+
+    public void escenaTercera() throws Exception {
+
+        Parent tercerRoot = FXMLLoader.load(getClass().getResource("EscenaEstadistica.fxml"));
+        Scene tercerScene = new Scene(tercerRoot);
+        primaryStage.setScene(tercerScene);
         primaryStage.setTitle("UNO");
         primaryStage.setFullScreen(true);
         primaryStage.show();
