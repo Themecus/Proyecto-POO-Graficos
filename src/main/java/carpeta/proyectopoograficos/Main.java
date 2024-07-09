@@ -27,8 +27,7 @@ public class Main extends Application {
     }
 
     public void escenaSegunda() throws Exception {
-        //Menu acceder2= new Menu();
-        //acceder2.menu();
+
 
         Parent segundoRoot = FXMLLoader.load(getClass().getResource("EscenaJuego.fxml"));
         Scene segundoScene = new Scene(segundoRoot);
