@@ -1,10 +1,10 @@
 package carpeta.proyectopoograficos;
-
+import org.json.JSONObject;
 public abstract class CartaBlanca {
 
-   private int contadorCarta=0;
-   private String color;
-   private String accion;
+    private int contadorCarta = 0;
+    private String color;
+    private String accion;
 
     public CartaBlanca(int contadorCarta, String color, String accion) {
         this.contadorCarta = contadorCarta;
@@ -41,5 +41,14 @@ public abstract class CartaBlanca {
 
     // Método abstracto que las subclases implementarán
     public abstract boolean puedeSerJugada(CartaBlanca cartaMontana, int tamanoMazoJugador);
-            
+
+    //Convertir en formato valido para JSON
+    public String toJson() {
+        JSONObject cartaJson = new JSONObject();
+        cartaJson.put("contadorCarta", contadorCarta);
+        cartaJson.put("color", color);
+        cartaJson.put("accion", accion);
+        return cartaJson.toString();
+    }
+    //Convertir en formato valido para JSON
 }

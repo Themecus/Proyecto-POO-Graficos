@@ -109,6 +109,7 @@ public class ZonaDeJuego {
                     break;
                 case 3:
                     usar.guardarNombre(nombre);
+                    usar.guardarPartida();
                     System.out.println("Partida guardada correctamente");
                     break;
                 case 4:
