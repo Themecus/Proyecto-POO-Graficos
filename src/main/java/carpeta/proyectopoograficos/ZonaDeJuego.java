@@ -108,7 +108,8 @@ public class ZonaDeJuego {
                     llaveJugador = true;
                     break;
                 case 3:
-
+                    usar.guardarNombre(nombre);
+                    System.out.println("Partida guardada correctamente");
                     break;
                 case 4:
 

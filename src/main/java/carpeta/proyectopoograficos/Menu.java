@@ -6,6 +6,7 @@ public class Menu {
     ZonaDeJuego acceder = new ZonaDeJuego();
     ReglasDeSimbolos acceder1 = new ReglasDeSimbolos();
     Scanner entrada = new Scanner(System.in);
+    ControlCartas acceder2 = new ControlCartas();
 
     /**
      * El metodo es un menu sencillo, la opcion 1 dara arranque a la operacion, llevandolo al metodo
@@ -50,8 +51,10 @@ public class Menu {
                     }
                     break;
                 case 2:
-                    // Implementar la lógica para cargar una partida
-                    System.out.println("Funcionalidad de cargar partida aun no implementada.");
+
+                    String aux = acceder2.cargarNombre();
+                    System.out.println("Hola, que gusto verte de nuevo "+ aux);
+                    acceder.tableroDeJuego(aux);
 
 
                     break;

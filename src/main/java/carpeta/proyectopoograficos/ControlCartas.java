@@ -1,5 +1,11 @@
 package carpeta.proyectopoograficos;
 
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -280,7 +286,25 @@ public class ControlCartas {
             }
         }
     }
+    public void guardarNombre(String nombreJugador){
+        JSONObject partida = new JSONObject();
+        partida.put("nombreJugador", nombreJugador);
+        try (FileWriter file = new FileWriter("datos/nombreJugador.json")) {
+            file.write(partida.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
+    public String cargarNombre() {
+        try (FileReader fileReader = new FileReader("datos/nombreJugador.json")) {
+            JSONObject partida = new JSONObject(new JSONTokener(fileReader));
+            return partida.getString("nombreJugador");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     /**
      * Un metodo para cambiar el sentido de turnos, funciona con recursividad por asi decirlo
