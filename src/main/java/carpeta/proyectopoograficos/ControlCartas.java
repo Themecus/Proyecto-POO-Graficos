@@ -330,7 +330,7 @@ public class ControlCartas {
         JSONObject partida = new JSONObject();
         JSONArray jsonArrayJugador = new JSONArray();
         for (CartaBlanca carta : mazoJugador) {
-            jsonArrayJugador.put(carta.toJson()); // Suponiendo que CartaBlanca tiene un método toJson()
+            jsonArrayJugador.put(carta.toJson());
         }
         partida.put("mazoJugador", jsonArrayJugador);
         try (FileWriter file = new FileWriter("datos/mazoJugador.json")) {
@@ -350,7 +350,7 @@ public class ControlCartas {
         JSONObject partida = new JSONObject();
         JSONArray jsonArrayRival = new JSONArray();
         for (CartaBlanca carta : mazoRival) {
-            jsonArrayRival.put(carta.toJson()); // Suponiendo que CartaBlanca tiene un método toJson()
+            jsonArrayRival.put(carta.toJson());
         }
         partida.put("mazoRival", jsonArrayRival);
         try (FileWriter file = new FileWriter("datos/mazoRival.json")) {
@@ -370,7 +370,7 @@ public class ControlCartas {
         JSONObject partida = new JSONObject();
         JSONArray jsonArrayMontana = new JSONArray();
         for (CartaBlanca carta : mazoMontana) {
-            jsonArrayMontana.put(carta.toJson()); // Suponiendo que CartaBlanca tiene un método toJson()
+            jsonArrayMontana.put(carta.toJson());
         }
         partida.put("mazoMontana", jsonArrayMontana);
         try (FileWriter file = new FileWriter("datos/mazoMontana.json")) {
@@ -390,7 +390,7 @@ public class ControlCartas {
         JSONObject partida = new JSONObject();
         JSONArray jsonArrayMazo = new JSONArray();
         for (CartaBlanca carta : mazo) {
-            jsonArrayMazo.put(carta.toJson()); // Suponiendo que CartaBlanca tiene un método toJson()
+            jsonArrayMazo.put(carta.toJson());
         }
         partida.put("mazo", jsonArrayMazo);
         try (FileWriter file = new FileWriter("datos/mazo.json")) {
