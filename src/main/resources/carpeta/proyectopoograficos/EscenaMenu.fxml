@@ -4,16 +4,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carpeta.proyectopoograficos.EscenaMenuControlador">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #F8E5E1;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carpeta.proyectopoograficos.EscenaMenuControlador">
    <children>
       <Label fx:id="tituloApertura" alignment="CENTER" contentDisplay="RIGHT" prefHeight="36.0" prefWidth="325.0" text="BIENVENIDO AL UNO" textAlignment="CENTER" textFill="#8e3333">
          <font>
             <Font name="Comic Sans MS" size="21.0" />
          </font>
       </Label>
-      <Button fx:id="botonJugar" mnemonicParsing="false" onAction="#jugarJuego" prefHeight="43.0" prefWidth="328.0" text="Jugar" />
-      <Button fx:id="botonCargar" mnemonicParsing="false" prefHeight="35.0" prefWidth="328.0" text="Cargar partidad" />
-      <Button fx:id="botonEstadisticas" mnemonicParsing="false" onAction="#estadistica" prefHeight="32.0" prefWidth="327.0" text="Estadisticas" />
-      <Button fx:id="botonSalir" mnemonicParsing="false" onAction="#cerrarPorgrama" prefHeight="39.0" prefWidth="325.0" text="Salir" />
+      <Button fx:id="botonJugar" mnemonicParsing="false" onAction="#jugarJuego" prefHeight="43.0" prefWidth="328.0" style="-fx-background-color: #E9AEA1;" text="Jugar" />
+      <Button fx:id="botonCargar" mnemonicParsing="false" prefHeight="35.0" prefWidth="328.0" style="-fx-background-color: #E9AEA1;" text="Cargar partidad" />
+      <Button fx:id="botonEstadisticas" mnemonicParsing="false" onAction="#estadistica" prefHeight="32.0" prefWidth="327.0" style="-fx-background-color: #E9AEA1;" text="Estadisticas" />
+      <Button fx:id="botonSalir" mnemonicParsing="false" onAction="#cerrarPorgrama" prefHeight="39.0" prefWidth="325.0" style="-fx-background-color: #E9AEA1;" text="Salir" />
    </children>
 </VBox>

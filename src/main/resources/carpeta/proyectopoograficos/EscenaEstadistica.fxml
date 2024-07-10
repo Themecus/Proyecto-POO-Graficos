@@ -3,10 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carpeta.proyectopoograficos.EscenaEstadisticaControlador">
+<AnchorPane prefHeight="400.0" prefWidth="590.0" style="-fx-background-color: #F8E5E1;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carpeta.proyectopoograficos.EscenaEstadisticaControlador">
    <children>
-      <Button fx:id="btoVolver" layoutX="274.0" layoutY="336.0" mnemonicParsing="false" onAction="#volver" text="Volver" />
-      <TreeTableView layoutX="9.0" layoutY="174.0" prefHeight="147.0" prefWidth="472.0">
+      <Button fx:id="btoVolver" layoutX="274.0" layoutY="336.0" mnemonicParsing="false" onAction="#volver" style="-fx-background-color: #E9AEA1;" text="Volver" />
+      <TreeTableView layoutX="9.0" layoutY="174.0" prefHeight="147.0" prefWidth="472.0" style="-fx-background-color: #E9AEA1;">
         <columns>
             <TreeTableColumn fx:id="colum1" prefWidth="75.0" text="0-9" />
           <TreeTableColumn fx:id="colum2" prefWidth="75.0" text="Toma 2" />
@@ -17,7 +17,7 @@
         </columns>
       </TreeTableView>
 
-       <TreeTableView layoutX="9.0" layoutY="3.0" prefHeight="137.0" prefWidth="472.0">
+       <TreeTableView layoutX="9.0" layoutY="3.0" prefHeight="137.0" prefWidth="472.0" style="-fx-background-color: #E9AEA1;">
            <columns>
                <TreeTableColumn fx:id="colum7" prefWidth="75.0" text="0-9" />
                <TreeTableColumn fx:id="colum8" prefWidth="75.0" text="Toma 2" />

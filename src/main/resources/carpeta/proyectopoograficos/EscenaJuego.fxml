@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carpeta.proyectopoograficos.EscenaJuegoControlador">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F8E5E1;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carpeta.proyectopoograficos.EscenaJuegoControlador">
    <children>
       <VBox layoutY="8.0" prefHeight="389.0" prefWidth="622.0" spacing="30.0">
          <children>
@@ -17,10 +17,10 @@
                </children></HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
                <children>
-                  <Button fx:id="btoRobo" mnemonicParsing="false" onAction="#agregarCarta" text="Robar" />
+                  <Button fx:id="btoRobo" mnemonicParsing="false" onAction="#agregarCarta" style="-fx-background-color: #E9AEA1;" text="Robar" />
                   <ListView fx:id="mazoJugador" prefHeight="200.0" prefWidth="200.0" />
 
-                  <Button fx:id="btoLanzar" mnemonicParsing="false" onAction="#quitarCarta" text="Lanzar" />
+                  <Button fx:id="btoLanzar" mnemonicParsing="false" onAction="#quitarCarta" style="-fx-background-color: #E9AEA1;" text="Lanzar" />
                </children></HBox>
          </children>
       </VBox>

@@ -21,7 +21,7 @@ public class Menu {
         String nombre = "";
         boolean continuar = true;
 
-        do {
+        while (continuar){
             System.out.println("Bienvenido al Uno version 0.5");
             System.out.println("Por favor, elija una opcion:");
             System.out.println("1) Iniciar una nueva partida");
@@ -67,8 +67,8 @@ public class Menu {
                     acceder1.instrucciones();
                     break;
                 case 5:
-                    continuar = false;
                     System.out.println("Gracias por jugar. ¡Hasta luego!");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("No es una opcion valida, por favor elija otra vez.");
@@ -77,6 +77,6 @@ public class Menu {
 
             System.out.println(); // Línea en blanco para separar las iteraciones del menú
 
-        } while (continuar);
+        }
     }
 }   
