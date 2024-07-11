@@ -304,6 +304,7 @@ public class ControlCartas {
         }
 
     }
+
     /**
      * metodo para cargar el archivo, retorna del archivo el valor del nombre
      * del jugador

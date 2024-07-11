@@ -72,7 +72,7 @@ public class ApartadoJugador {
                     } else if (cartaSeleccionada.getAccion().equals("S")) {
                         // cambiarSentido(cartaSeleccionada, cartaElegida);
                         cambiarElSentidoJugador(cartaElegida);
-                    } else if (cartaSeleccionada.getAccion().equals("r")) {
+                    } else if (cartaSeleccionada.getAccion().equals("V")) {
                         //  cancelarTurno(cartaSeleccionada, cartaElegida);
                         bloquearElTurnoJugador(cartaElegida);
                     }
