@@ -5,14 +5,24 @@ public abstract class CartaBlanca {
     private int contadorCarta = 0;
     private String color;
     private String accion;
+    private int numeroOriginal=0;
 
-    public CartaBlanca(int contadorCarta, String color, String accion) {
+    public CartaBlanca(int contadorCarta, String color, String accion, int numeroOriginal) {//coloque esta estupides para ver xomo resolver el problema de descarte de cartas
         this.contadorCarta = contadorCarta;
         this.color = color;
         this.accion = accion;
+        this.numeroOriginal = numeroOriginal;
     }
 
     public CartaBlanca() {
+    }
+
+    public int getNumeroOriginal() {
+        return numeroOriginal;
+    }
+
+    public void setNumeroOriginal(int numeroOriginal) {
+        this.numeroOriginal = numeroOriginal;
     }
 
     public int getContadorCarta() {

@@ -2,8 +2,8 @@ package carpeta.proyectopoograficos;
 
 public class CartaNumerica extends CartaBlanca {
 
-    public CartaNumerica(int contadorCarta, String color, String accion) {
-        super(contadorCarta, color, accion);
+    public CartaNumerica(int contadorCarta, String color, String accion, int numeroOriginal) {
+        super(contadorCarta, color, accion,numeroOriginal);
     }
 
     public CartaNumerica() {

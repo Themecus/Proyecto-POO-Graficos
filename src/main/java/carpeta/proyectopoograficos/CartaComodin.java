@@ -2,8 +2,8 @@ package carpeta.proyectopoograficos;
 
 public class CartaComodin extends CartaBlanca{
 
-    public CartaComodin(int contadorCarta, String color, String accion) {
-        super(contadorCarta, color, accion);
+    public CartaComodin(int contadorCarta, String color, String accion, int numeroOriginal) {
+        super(contadorCarta, color, accion,numeroOriginal);
     }
 
     public CartaComodin() {

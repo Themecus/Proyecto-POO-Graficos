@@ -22,18 +22,17 @@ public class Main extends Application {
         Scene mainScene = new Scene(mainRoot);
         primaryStage.setScene(mainScene);
         primaryStage.setTitle("UNO");
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 
     public void escenaSegunda() throws Exception {
 
-
         Parent segundoRoot = FXMLLoader.load(getClass().getResource("EscenaJuego.fxml"));
         Scene segundoScene = new Scene(segundoRoot);
         primaryStage.setScene(segundoScene);
         primaryStage.setTitle("UNO");
-        primaryStage.setFullScreen(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 
@@ -43,7 +42,7 @@ public class Main extends Application {
         Scene tercerScene = new Scene(tercerRoot);
         primaryStage.setScene(tercerScene);
         primaryStage.setTitle("UNO");
-        primaryStage.setFullScreen(true);
+       // primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 

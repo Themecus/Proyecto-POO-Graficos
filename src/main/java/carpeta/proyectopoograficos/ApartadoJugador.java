@@ -1,5 +1,6 @@
 package carpeta.proyectopoograficos;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class ApartadoJugador {
@@ -10,6 +11,7 @@ public class ApartadoJugador {
         return acceder;
     }
 
+    private int num=0;
     public void setAcceder(ControlCartas acceder) {
         this.acceder = acceder;
     }
@@ -21,7 +23,7 @@ public class ApartadoJugador {
      * @author Miguel Canache
      */
 
-    public void condicionesJugador() {
+    /*public void condicionesJugador() {
         int cartaElegida = 0;
         String color;
 
@@ -38,7 +40,7 @@ public class ApartadoJugador {
         // Si no puede jugar ninguna carta, debe robar una del mazo
         if (!puedeJugar) {
             System.out.println("No posees ninguna carta para jugar, agarra una del mazo.");
-            robarCartasJugador();
+            robarCartasJugador(usar.mazo);
             return;
         }
 
@@ -85,7 +87,7 @@ public class ApartadoJugador {
 
             System.out.println("\n");
         }
-    }
+    }*/
 
     /**
      * funciona con recursividad simple, descarta la carta del jugador y
@@ -95,12 +97,12 @@ public class ApartadoJugador {
      * @param cartaElegida lo pide descartarCartasJugador
      * @author Marco Argonis
      */
-    public void cambiarElSentidoJugador(int cartaElegida) {
+    /*public void cambiarElSentidoJugador(int cartaElegida) {
         System.out.println("El jugador 1 (usted) a jugado cambiar el sentido");
         System.out.println("vuelves a jugar");
         descartarCartasJugador(cartaElegida);
         condicionesJugador();
-    }
+    }*/
 
     /**
      * funciona con recursividad simple, descarta la carta del jugador y
@@ -110,12 +112,12 @@ public class ApartadoJugador {
      * @param cartaElegida lo pide descartarCartasJugador
      * @author Marco Argonis
      */
-    public void bloquearElTurnoJugador(int cartaElegida) {
+    /*public void bloquearElTurnoJugador(int cartaElegida) {
         System.out.println("El jugador 1 (usted) a jugado bloquear el turno al rival");
         System.out.println("vuelves a jugar");
         descartarCartasJugador(cartaElegida);
         condicionesJugador();
-    }
+    }*/
 
     /**
      * Un metodo para que el jugador pueda ver su mazo
@@ -123,18 +125,18 @@ public class ApartadoJugador {
      * @author Miguel Canache
      */
 
-    public void mostrarBarajaJugador() {
-        for (int i = 0; i < acceder.mazoJugador.size(); i++) {
-            if (acceder.mazoJugador.get(i).getAccion() == null) {
-                System.out.print(acceder.mazoJugador.get(i).getContadorCarta() + "-" + acceder.mazoJugador.get(i).getColor() + " | ");
+    public void mostrarBarajaJugador(LinkedList<CartaBlanca> mazoJugador) {
+        for (int i = 0; i < mazoJugador.size(); i++) {
+            if (mazoJugador.get(i).getAccion() == null) {
+                System.out.print(mazoJugador.get(i).getContadorCarta() + "-" + mazoJugador.get(i).getColor() + " | ");
             }
 
-            if (acceder.mazoJugador.get(i).getAccion() != null && acceder.mazoJugador.get(i).getAccion() != "CT4" && acceder.mazoJugador.get(i).getAccion() != "CC") {
-                System.out.print(acceder.mazoJugador.get(i).getAccion() + "-" + acceder.mazoJugador.get(i).getColor() + " | ");
+            if (mazoJugador.get(i).getAccion() != null && mazoJugador.get(i).getAccion() != "T4" && mazoJugador.get(i).getAccion() != "C") {
+                System.out.print(mazoJugador.get(i).getAccion() + "-" + mazoJugador.get(i).getColor() + " | ");
             }
 
-            if (acceder.mazoJugador.get(i).getAccion() == "CT4" || acceder.mazoJugador.get(i).getAccion() == "CC") {
-                System.out.print(acceder.mazoJugador.get(i).getAccion() + " | ");
+            if (mazoJugador.get(i).getAccion() == "T4" || mazoJugador.get(i).getAccion() == "C") {
+                System.out.print(mazoJugador.get(i).getAccion() + " | ");
             }
         }
     }
@@ -160,10 +162,12 @@ public class ApartadoJugador {
      * @author Miguel Canache
      */
 
-    public void robarCartasJugador() {
-        CartaBlanca numero = acceder.mazo.get(0);
-        acceder.mazoJugador.addLast(numero);
-        acceder.mazo.remove(numero);
+    public void robarCartasJugador(ControlCartas contenido) {
+        CartaBlanca numero =contenido.mazo.get(0);
+        contenido.mazoJugador.addLast(numero);
+        contenido.mazo.remove(numero);
+        contenido.mazoJugador.get(0).setNumeroOriginal(num);
+        num++;
     }
 
     /**
@@ -173,10 +177,10 @@ public class ApartadoJugador {
      * @author Miguel Canache
      */
 
-    public void descartarCartasJugador(int i) {
-        CartaBlanca numero = acceder.mazoJugador.get(i);
-        acceder.mazoMontana.addFirst(numero);
-        acceder.mazoJugador.remove(i);
+    public void descartarCartasJugador(int i,ControlCartas contenido) {
+        CartaBlanca numero = contenido.mazoJugador.get(i);
+        contenido.mazoMontana.addFirst(numero);
+        contenido.mazoJugador.remove(i);
     }
 
     /**

@@ -103,7 +103,7 @@ public class ZonaDeJuego {
             System.out.println("\n");
             switch (opciones) {
                 case 2:
-                    usarJugador.condicionesJugador();
+                    //usarJugador.condicionesJugador();
                     System.out.println("\n");
                     llaveJugador = true;
                     break;

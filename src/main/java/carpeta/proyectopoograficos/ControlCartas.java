@@ -32,11 +32,11 @@ public class ControlCartas {
             crearCartaNumerica(color);
             crearCartaAccion(color, "V");
             crearCartaAccion(color, "S");
-            crearCartaAccion(color, "CT2");
+            crearCartaAccion(color, "T2");
         }
         // Crear cartas comodín
-        crearCartaComodin("CC");
-        crearCartaComodin("CT4");
+        crearCartaComodin("C");
+        crearCartaComodin("T4");
     }
 
     /**
