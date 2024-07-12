@@ -8,7 +8,7 @@
    <children>
       <HBox fx:id="HBOXJugador" alignment="TOP_CENTER" layoutX="19.0" layoutY="300.0" prefHeight="127.0" prefWidth="562.0" style="-fx-background-color: blue;" />
       <HBox fx:id="HBOXMazo" layoutX="165.0" layoutY="171.0" prefHeight="100.0" prefWidth="71.0" style="-fx-background-color: red;" />
-      <Button fx:id="btoRobar" layoutX="86.0" layoutY="208.0" mnemonicParsing="false" onAction="#robar2" text="Robar" />
+      <Button fx:id="btoRobar" layoutX="86.0" layoutY="208.0" mnemonicParsing="false" onAction="#robar" text="Robar" />
       <Label layoutX="246.0" layoutY="212.0" text="para el cambio color" />
       <ImageView fitHeight="127.0" fitWidth="71.0" layoutX="390.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
          <image>

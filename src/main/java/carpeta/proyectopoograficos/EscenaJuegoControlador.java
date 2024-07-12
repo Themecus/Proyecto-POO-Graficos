@@ -8,6 +8,8 @@ import javafx.scene.layout.HBox;
 
 import java.util.Objects;
 
+
+
 public class EscenaJuegoControlador {
 
     @FXML
@@ -33,12 +35,12 @@ public class EscenaJuegoControlador {
 
         for (int i = 0; i < 7; i++) {
             ImageView nuevoImageView = new ImageView();
-            Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazo2(i)+".jpg")));
+            Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazoInicial(i)+".jpg")));
             nuevoImageView.setImage(nuevaCarta);
-            nuevoImageView.setOnMouseClicked(event -> descartarCarta2(nuevoImageView));
+            nuevoImageView.setOnMouseClicked(event -> descartarCarta(nuevoImageView));
             nuevoImageView.setFitHeight(100);
             nuevoImageView.setFitWidth(50);
-            nuevoImageView.setId(""+contador);
+            nuevoImageView.setId(desencriptarMazoInicial(i));
             contador++;
             HBOXJugador.getChildren().add(nuevoImageView);
         }
@@ -46,7 +48,7 @@ public class EscenaJuegoControlador {
 
 
     @FXML
-    public String desencriptarMazo()//esto es clave para saber que graficos usar para las cartas
+    public String desencriptarMazo()
     {
         String nombre = "";
 
@@ -62,14 +64,14 @@ public class EscenaJuegoControlador {
                 nombre="C"+usar.mazo.get(0).getAccion();
             }
             usarJugador.robarCartasJugador(usar);
-            usarJugador.mostrarBarajaJugador(usar.mazoJugador);
-            System.out.println("\n");
+            //usarJugador.mostrarBarajaJugador(usar.mazoJugador);
+
             return nombre;
 
     }
 
     @FXML
-    public String desencriptarMazo2(int i)//una copia cuando iniciamos
+    public String desencriptarMazoInicial(int i)//una copia cuando iniciamos
     {
         String nombre = "";
 
@@ -84,8 +86,7 @@ public class EscenaJuegoControlador {
         if (usar.mazoJugador.get(i).getAccion() == "T4" || usar.mazoJugador.get(i).getAccion() == "C") {
             nombre="C"+usar.mazoJugador.get(i).getAccion();
         }
-        usarJugador.mostrarBarajaJugador(usar.mazoJugador);
-        System.out.println("\n");
+        //usarJugador.mostrarBarajaJugador(usar.mazoJugador);
         return nombre;
 
     }
@@ -99,14 +100,15 @@ public class EscenaJuegoControlador {
      * @author Marco Argonis
      */
     @FXML
-    private void robar2() {
+    private void robar() {
+        String IDCarta=desencriptarMazo();
         ImageView nuevoImageView = new ImageView();
-        Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazo()+".jpg")));
+        Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+IDCarta+".jpg")));
         nuevoImageView.setImage(nuevaCarta);
-        nuevoImageView.setOnMouseClicked(event -> descartarCarta2(nuevoImageView));
+        nuevoImageView.setOnMouseClicked(event -> descartarCarta(nuevoImageView));
         nuevoImageView.setFitHeight(100);
         nuevoImageView.setFitWidth(50);
-        nuevoImageView.setId(""+contador);
+        nuevoImageView.setId(IDCarta);
         contador++;
         HBOXJugador.getChildren().add(nuevoImageView);
     }
@@ -120,16 +122,78 @@ public class EscenaJuegoControlador {
      * en el HBOXMazo, si no hay, solo hace add, si la hay, un remove
      * @author Marco Argonis
      */
-    private void descartarCarta2(ImageView carta) {
+    private void descartarCarta(ImageView carta) {
+        int numeroID;
         HBOXJugador.getChildren().remove(carta);
         if (cartaActual != null) {
             HBOXMazo.getChildren().remove(cartaActual);
         }
         cartaActual = carta;
         HBOXMazo.getChildren().add(cartaActual);
-        usarJugador.descartarCartasJugador(Integer.parseInt(cartaActual.getId()),usar);
+        numeroID=cifrarCartas(cartaActual.getId());
+        usarJugador.descartarCartasJugador(usar,numeroID);
+        usarJugador.mostrarBarajaJugador(usar.mazoJugador);
+        //System.out.println(+"\n");
+
+    }
+
+    private int cifrarCartas(String id) {
+        String numero="" ,color="",accion="";
+        int resultado = 0;
+        int contador=1;
+
+        while(contador!=id.length()){
+            if((id.charAt(contador)=='B'||id.charAt(contador)=='R'||id.charAt(contador)=='G'||id.charAt(contador)=='Y'))
+            {
+                color= String.valueOf(id.charAt(contador));
+            }
+
+            if (id.charAt(contador) >= '0' && id.charAt(contador) <= '9'&& id.charAt(contador-1) !='T') {
+                numero=String.valueOf(id.charAt(contador));
+            }
+
+            if(((id.charAt(contador)=='T')&&(id.charAt(contador+1)=='2'))){
+                accion=String.valueOf(id.charAt(contador));
+                if(id.charAt(contador)=='T')
+                {
+                    accion=accion+"2";
+                }
+            }
+            if(id.charAt(contador)=='S'){
+                accion=String.valueOf(id.charAt(contador));
+            }
+            if(id.charAt(contador)=='V'){
+                accion=String.valueOf(id.charAt(contador));
+
+            }
+
+            if(id.charAt(contador)=='T'&&(id.charAt(contador+1)=='4'))
+            {
+                accion=String.valueOf(id.charAt(contador));
+                if(id.charAt(contador)=='T')
+                {
+                    accion=accion+"4";
+                }
+
+            }
+
+            if(id.charAt(contador)=='C')
+            {
+                accion=String.valueOf(id.charAt(contador));
+
+            }
+
+          contador++;
+        }
+
+
+        resultado=usarJugador.rastrearCarta(usar.mazoJugador,numero,color,accion);
+        System.out.println("Posicion= "+resultado+"\n");
         usarJugador.mostrarBarajaJugador(usar.mazoJugador);
         System.out.println("\n");
-//aqui tenemos un problema, ya que, como demonios hacemos para que la carta que se elimine en la ventana, concuerde con el que se elimina en codigo?
+        return resultado;
+
     }
+
+
 }

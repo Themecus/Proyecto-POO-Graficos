@@ -142,6 +142,24 @@ public class ApartadoJugador {
     }
 
     /**
+     * Un metodo para que el jugador pueda encontrar la carta que busca en base su posicion numeral
+     *
+     * @author Miguel Canache
+     */
+
+    public int rastrearCarta(LinkedList<CartaBlanca> mazoJugador,String numero,String color,String accion) {//aquiiiiiiii
+        for (int i = 0; i < mazoJugador.size(); i++) {
+            if (mazoJugador.get(i).getContadorCarta()==Integer.parseInt(numero) ) {
+                return i;
+            }
+
+
+
+        }
+        return -5;
+    }
+
+    /**
      * Un metodo para estar al tanto de cuantas cartas quedan en mazo del jugador 1
      *
      * @return Devuelve el estado del mazo jugador, falso si esta lleno y verdadero si esta lleno
@@ -166,18 +184,17 @@ public class ApartadoJugador {
         CartaBlanca numero =contenido.mazo.get(0);
         contenido.mazoJugador.addLast(numero);
         contenido.mazo.remove(numero);
-        contenido.mazoJugador.get(0).setNumeroOriginal(num);
-        num++;
+
     }
 
     /**
      * Al final del turno del jugador 1, descarta una carta y la deja en el mazo de descarte
      *
-     * @param i Desde el metodo condicionesJugador, se enviara que carta se saca
      * @author Miguel Canache
      */
 
-    public void descartarCartasJugador(int i,ControlCartas contenido) {
+    public void descartarCartasJugador(ControlCartas contenido, int numeroID) {
+        int i=numeroID;
         CartaBlanca numero = contenido.mazoJugador.get(i);
         contenido.mazoMontana.addFirst(numero);
         contenido.mazoJugador.remove(i);
@@ -294,4 +311,7 @@ public class ApartadoJugador {
             tomar++;
         }
     }
+
+
+
 }
