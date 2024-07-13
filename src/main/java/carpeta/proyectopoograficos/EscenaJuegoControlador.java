@@ -20,9 +20,10 @@ public class EscenaJuegoControlador {
     public Button btoRobar;
 
     ControlCartas usar = new ControlCartas();
-    ApartadoJugador usarJugador= new ApartadoJugador();
+    ApartadoJugador usarJugador = new ApartadoJugador();
 
-    private int contador=0;
+    private int contador = 0;
+
     @FXML
     private void initialize() {//esto inicialiamos un juego estandar, osea 7 cartas
 
@@ -32,7 +33,6 @@ public class EscenaJuegoControlador {
         usar.repartirCartas();
 
         repartirGraficos();
-        //agregarCartaInicialAlMazo();
 
 
         usarJugador.mostrarBarajaJugador(usar.mazoJugador);
@@ -44,7 +44,7 @@ public class EscenaJuegoControlador {
 
         for (int i = 0; i < 7; i++) {
             ImageView nuevoImageView = new ImageView();
-            Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazoInicial(i)+".jpg")));
+            Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + desencriptarMazoInicial(i) + ".jpg")));
             nuevoImageView.setImage(nuevaCarta);
             nuevoImageView.setOnMouseClicked(event -> descartarCarta(nuevoImageView));
             nuevoImageView.setFitHeight(100);
@@ -54,12 +54,7 @@ public class EscenaJuegoControlador {
             HBOXJugador.getChildren().add(nuevoImageView);
         }
     }
-    private void repartirGraficosMazo(){
-        ImageView nuevoImageView = new ImageView();
-        Image nuevaImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazo()+".jpg")));
-        cartaActual.setImage(nuevaImage);
-        HBOXMazo.getChildren().add(cartaActual);
-    }
+
     private void repartirGraficos() {
         for (int i = 0; i < 7; i++) {
             ImageView nuevoImageView = new ImageView();
@@ -74,53 +69,26 @@ public class EscenaJuegoControlador {
         }
     }
 
-    public void agregarCartaInicialAlMazo(){
-        ImageView nuevoImageView = new ImageView();
-        Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + desencriptarMazo() + ".jpg")));
-        nuevoImageView.setImage(nuevaCarta);
-        nuevoImageView.setOnMouseClicked(event -> descartarCartaMazo(nuevoImageView));
-        nuevoImageView.setFitHeight(100);
-        nuevoImageView.setFitWidth(50);
-        nuevoImageView.setId(String.valueOf(0)); // Asignar el índice como ID
-        contador++;
-        HBOXJugador.getChildren().add(nuevoImageView);
-    }
-    // En algún lugar apropiado (por ejemplo, en el método de inicialización):
-    /*private void agregarCartaInicialAlMazo() {
-        CartaBlanca cartaInicial = usar.mazoJugador.getFirst(); // Toma la primera carta del mazo
-        ImageView cartaInicialView = new ImageView();
-        Image imagenCartaInicial = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + desencriptarMazoInicial(0) + ".jpg")));
-        cartaInicialView.setImage(imagenCartaInicial);
-        cartaInicialView.setOnMouseClicked(event -> descartarCarta(cartaInicialView)); // Asigna el evento de clic
-        cartaInicialView.setFitHeight(100);
-        cartaInicialView.setFitWidth(50);
-        cartaInicialView.setId(String.valueOf(0)); // Asignar el índice como ID
-        contador++;
-        HBOXMazo.getChildren().add(cartaInicialView); // Agrega al HBOXMazo
-    }*/
-
-
 
     @FXML
-    public String desencriptarMazo()
-    {
+    public String desencriptarMazo() {
         String nombre = "";
 
-            if (usar.mazo.get(0).getAccion() == null) {
-                nombre="C"+usar.mazo.get(0).getColor()+usar.mazo.get(0).getContadorCarta();
-            }
+        if (usar.mazo.get(0).getAccion() == null) {
+            nombre = "C" + usar.mazo.get(0).getColor() + usar.mazo.get(0).getContadorCarta();
+        }
 
-            if (usar.mazo.get(0).getAccion() != null && usar.mazo.get(0).getAccion() != "T4" && usar.mazo.get(0).getAccion() != "C") {
-                nombre="C"+usar.mazo.get(0).getColor()+usar.mazo.get(0).getAccion();
-            }
+        if (usar.mazo.get(0).getAccion() != null && usar.mazo.get(0).getAccion() != "T4" && usar.mazo.get(0).getAccion() != "C") {
+            nombre = "C" + usar.mazo.get(0).getColor() + usar.mazo.get(0).getAccion();
+        }
 
-            if (usar.mazo.get(0).getAccion() == "T4" || usar.mazo.get(0).getAccion() == "C") {
-                nombre="C"+usar.mazo.get(0).getAccion();
-            }
-            usarJugador.robarCartasJugador(usar);
-            //usarJugador.mostrarBarajaJugador(usar.mazoJugador);
+        if (usar.mazo.get(0).getAccion() == "T4" || usar.mazo.get(0).getAccion() == "C") {
+            nombre = "C" + usar.mazo.get(0).getAccion();
+        }
+        usarJugador.robarCartasJugador(usar);
+        //usarJugador.mostrarBarajaJugador(usar.mazoJugador);
 
-            return nombre;
+        return nombre;
 
     }
 
@@ -130,15 +98,15 @@ public class EscenaJuegoControlador {
         String nombre = "";
 
         if (usar.mazoJugador.get(i).getAccion() == null) {
-            nombre="C"+usar.mazoJugador.get(i).getColor()+usar.mazoJugador.get(i).getContadorCarta();
+            nombre = "C" + usar.mazoJugador.get(i).getColor() + usar.mazoJugador.get(i).getContadorCarta();
         }
 
         if (usar.mazoJugador.get(i).getAccion() != null && usar.mazoJugador.get(i).getAccion() != "T4" && usar.mazoJugador.get(i).getAccion() != "C") {
-            nombre="C"+usar.mazoJugador.get(i).getColor()+usar.mazoJugador.get(i).getAccion();
+            nombre = "C" + usar.mazoJugador.get(i).getColor() + usar.mazoJugador.get(i).getAccion();
         }
 
         if (usar.mazoJugador.get(i).getAccion() == "T4" || usar.mazoJugador.get(i).getAccion() == "C") {
-            nombre="C"+usar.mazoJugador.get(i).getAccion();
+            nombre = "C" + usar.mazoJugador.get(i).getAccion();
         }
         //usarJugador.mostrarBarajaJugador(usar.mazoJugador);
         return nombre;
@@ -151,13 +119,14 @@ public class EscenaJuegoControlador {
      * un objeto Image llamado nuevaCarta, que tiene de diferente? que se agrega una accion a la carta
      * por ultimo se agrega al HBox que es el HBox del jugador, es igual al anterior pero se le agrega lo de la accion
      * en las cartas dinamicas
+     *
      * @author Marco Argonis
      */
     @FXML
     private void robar2() {
-        String IDCarta=desencriptarMazo();
+        String IDCarta = desencriptarMazo();
         ImageView nuevoImageView = new ImageView();
-        Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+IDCarta+".jpg")));
+        Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + IDCarta + ".jpg")));
         nuevoImageView.setImage(nuevaCarta);
         nuevoImageView.setOnMouseClicked(event -> descartarCarta(nuevoImageView));
         nuevoImageView.setFitHeight(100);
@@ -186,30 +155,16 @@ public class EscenaJuegoControlador {
     }
 
 
-
     /**
      * El metodo descartar cartas pero mejorado, ya que la carta que elimine la agrega en HBOXMazo, con la
      * peculiaridad que reemplaza la que ya este
      * Primero eliminas la carta del HBox jugador, y haces un si condicional para varificar si hay una carta ahi
      * en el HBOXMazo, si no hay, solo hace add, si la hay, un remove
+     *
      * @author Marco Argonis
      */
-    private void descartarCarta2(ImageView carta) {
-        int numeroID;
-        HBOXJugador.getChildren().remove(carta);
-        if (cartaActual != null) {
-            HBOXMazo.getChildren().remove(cartaActual);
-        }
-        cartaActual = carta;
-        HBOXMazo.getChildren().add(cartaActual);
-        numeroID=cifrarCartas(cartaActual.getId());
-        usarJugador.descartarCartasJugador(usar,numeroID);
-        usarJugador.mostrarBarajaJugador(usar.mazoJugador);
-        System.out.println("Bandera"+numeroID);
-        //System.out.println(+"\n");
 
-    }
-    private void descartarCarta(ImageView carta) {
+    /*private void descartarCarta(ImageView carta) {
         int numeroID = Integer.parseInt(carta.getId());
         usarJugador.descartarCartasJugador(usar, numeroID);
         HBOXJugador.getChildren().remove(carta);
@@ -223,81 +178,35 @@ public class EscenaJuegoControlador {
 
         usarJugador.mostrarBarajaJugador(usar.mazoJugador);
         System.out.println("Bandera " + numeroID);
-    }
+    }*/
+    private void descartarCarta(ImageView cartaView) {
+        int numeroID = Integer.parseInt(cartaView.getId());
+        CartaBlanca cartaSeleccionada = usar.mazoJugador.get(numeroID);
+        CartaBlanca cartaActualMontana = usar.mazoMontana.peekFirst(); // Obtener la carta actual en la montaña
 
-    private void descartarCartaMazo(ImageView carta) {
-        int numeroID = Integer.parseInt(carta.getId());
-        usarJugador.descartarCartasMazo(usar, numeroID);
+        // Verificar si la carta seleccionada puede ser jugada
+        if (!cartaSeleccionada.puedeSerJugada(cartaActualMontana, usar.mazoJugador.size())) {
+            // Mostrar un mensaje de error o feedback al jugador, pero solo lo manda por consola
+            System.out.println("No puedes jugar esta carta.");
+            return;
+        }
+
+        // Proceder a descartar la carta
+        usarJugador.descartarCartasJugador(usar, numeroID);
+        HBOXJugador.getChildren().remove(cartaView);
         actualizarIdsCartas(); // Actualizar los IDs después de eliminar una carta
 
         if (cartaActual != null) {
             HBOXMazo.getChildren().remove(cartaActual);
         }
-        cartaActual = carta;
+        cartaActual = cartaView;
         HBOXMazo.getChildren().add(cartaActual);
 
-        //usarJugador.mostrarBarajaJugador(usar.mazoJugador);
+        usarJugador.mostrarBarajaJugador(usar.mazoJugador);
         System.out.println("Bandera " + numeroID);
     }
 
 
-    private int cifrarCartas(String id) {
-        String numero="" ,color="",accion="";
-        int resultado = 0;
-        int contador=1;
-
-        while(contador!=id.length()){
-            if((id.charAt(contador)=='B'||id.charAt(contador)=='R'||id.charAt(contador)=='G'||id.charAt(contador)=='Y'))
-            {
-                color= String.valueOf(id.charAt(contador));
-            }
-
-            if (id.charAt(contador) >= '0' && id.charAt(contador) <= '9'&& id.charAt(contador-1) !='T') {
-                numero=String.valueOf(id.charAt(contador));
-            }
-
-            if(((id.charAt(contador)=='T')&&(id.charAt(contador+1)=='2'))){
-                accion=String.valueOf(id.charAt(contador));
-                if(id.charAt(contador)=='T')
-                {
-                    accion=accion+"2";
-                }
-            }
-            if(id.charAt(contador)=='S'){
-                accion=String.valueOf(id.charAt(contador));
-            }
-            if(id.charAt(contador)=='V'){
-                accion=String.valueOf(id.charAt(contador));
-
-            }
-
-            if(id.charAt(contador)=='T'&&(id.charAt(contador+1)=='4'))
-            {
-                accion=String.valueOf(id.charAt(contador));
-                if(id.charAt(contador)=='T')
-                {
-                    accion=accion+"4";
-                }
-
-            }
-
-            if(id.charAt(contador)=='C')
-            {
-                accion=String.valueOf(id.charAt(contador));
-
-            }
-
-          contador++;
-        }
-
-
-        resultado=usarJugador.rastrearCarta(usar.mazoJugador,numero,color,accion);
-        System.out.println("Posicion= "+resultado+"\n");
-        usarJugador.mostrarBarajaJugador(usar.mazoJugador);
-        System.out.println("\n");
-        return resultado;
-
-    }
 
     private void actualizarIdsCartas() {
         for (int i = 0; i < HBOXJugador.getChildren().size(); i++) {
