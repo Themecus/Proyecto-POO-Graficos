@@ -4,44 +4,42 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="442.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carpeta.proyectopoograficos.EscenaJuegoControlador">
+<AnchorPane prefHeight="717.0" prefWidth="1328.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carpeta.proyectopoograficos.EscenaJuegoControlador">
    <children>
-      <HBox fx:id="HBOXJugador" alignment="TOP_CENTER" layoutX="19.0" layoutY="300.0" prefHeight="127.0" prefWidth="562.0" style="-fx-background-color: blue;" />
-      <HBox fx:id="HBOXMazo" layoutX="165.0" layoutY="171.0" prefHeight="100.0" prefWidth="71.0" style="-fx-background-color: red;" />
-      <Button fx:id="btoRobar" layoutX="86.0" layoutY="208.0" mnemonicParsing="false" onAction="#robar" text="Robar" />
-      <Label layoutX="246.0" layoutY="212.0" text="para el cambio color" />
-      <ImageView fitHeight="127.0" fitWidth="71.0" layoutX="390.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@CartasUno/ReversoCarta.jpg" />
-         </image>
-      </ImageView>
-      <HBox layoutX="86.0" layoutY="23.0" prefHeight="106.0" prefWidth="354.0">
+      <HBox fx:id="HBOXJugador" layoutX="22.0" layoutY="379.0" prefHeight="150.0" prefWidth="800.0" style="-fx-background-color: blue;">
          <children>
-            <ImageView fitHeight="106.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@CartasUno/ReversoCarta.jpg" />
-               </image></ImageView>
-            <ImageView fitHeight="106.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@CartasUno/ReversoCarta.jpg" />
-               </image></ImageView>
-            <ImageView fitHeight="106.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@CartasUno/ReversoCarta.jpg" />
-               </image></ImageView>
-            <ImageView fitHeight="106.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@CartasUno/ReversoCarta.jpg" />
-               </image></ImageView>
-            <ImageView fitHeight="106.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@CartasUno/ReversoCarta.jpg" />
-               </image></ImageView>
-            <ImageView fitHeight="106.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@CartasUno/ReversoCarta.jpg" />
-               </image></ImageView>
-         </children>
-      </HBox>
+            <ImageView fx:id="carta1" fitHeight="180.0" fitWidth="100.0" onMouseClicked="#descartar0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta2" fitHeight="180.0" fitWidth="100.0" onMouseClicked="#descartar1" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta3" fitHeight="180.0" fitWidth="100.0" onMouseClicked="#descartar2" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta4" fitHeight="180.0" fitWidth="100.0" onMouseClicked="#descartar3" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta5" fitHeight="180.0" fitWidth="100.0" onMouseClicked="#descartar4" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta6" fitHeight="180.0" fitWidth="100.0" onMouseClicked="#descartar5" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta7" fitHeight="180.0" fitWidth="100.0" onMouseClicked="#descartar6" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta8" fitHeight="180.0" fitWidth="100.0" onMouseClicked="#descartar7" pickOnBounds="true" preserveRatio="true" />
+         </children></HBox>
+      <HBox fx:id="HBOXMazo" layoutX="248.0" layoutY="207.0" prefHeight="150.0" prefWidth="265.0" spacing="50.0" style="-fx-background-color: red;">
+         <children>
+            <ImageView fx:id="descarte" fitHeight="150.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="color" fitHeight="150.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="SOMETIMES" />
+            <ImageView fx:id="robo" fitHeight="150.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true" />
+         </children></HBox>
+      <Button fx:id="btoRobar" layoutX="156.0" layoutY="269.0" mnemonicParsing="false" onAction="#rellenar" text="Robar" />
+      <Button fx:id="btoTurno" layoutX="101.0" layoutY="269.0" mnemonicParsing="false" text="Turno" />
+      <HBox layoutX="22.0" layoutY="559.0" prefHeight="143.0" prefWidth="800.0" style="-fx-background-color: yellow;">
+         <children>
+            <ImageView fx:id="carta9" fitHeight="150.0" fitWidth="100.0"  onMouseClicked="#descartar8" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta10" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#descartar9" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta11" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#descartar10" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta12" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#descartar11" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta13" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#descartar12" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta14" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#descartar13" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta15" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#descartar14" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta16" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#descartar15" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta17" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#descartar16" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta18" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#descartar17" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta19" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#descartar18" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="carta20" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#descartar19" pickOnBounds="true" preserveRatio="true" />
+         </children></HBox>
+      <Label layoutX="408.0" layoutY="29.0" text="cartas rival" />
    </children>
 </AnchorPane>

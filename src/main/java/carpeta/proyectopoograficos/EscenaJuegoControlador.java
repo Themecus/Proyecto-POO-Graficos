@@ -29,12 +29,11 @@ public class EscenaJuegoControlador {
         usar.barajearBarajaDeCartas();
         usar.repartirCartas();
         repartirGraficos();
-        usarJugador.mostrarBarajaJugador(usar.mazoJugador);
 
     }
 
 
-    private void repartirGraficos2() {//para hacer que lo que salga por consola tenga sentido en la pantalla, rojas rojas y asi
+    private void repartirGraficos() {//para hacer que lo que salga por consola tenga sentido en la pantalla, rojas rojas y asi
 
         for (int i = 0; i < 7; i++) {
             ImageView nuevoImageView = new ImageView();
@@ -48,20 +47,6 @@ public class EscenaJuegoControlador {
             HBOXJugador.getChildren().add(nuevoImageView);
         }
     }
-    private void repartirGraficos() {
-        for (int i = 0; i < 7; i++) {
-            ImageView nuevoImageView = new ImageView();
-            Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + desencriptarMazoInicial(i) + ".jpg")));
-            nuevoImageView.setImage(nuevaCarta);
-            nuevoImageView.setOnMouseClicked(event -> descartarCarta(nuevoImageView));
-            nuevoImageView.setFitHeight(100);
-            nuevoImageView.setFitWidth(50);
-            nuevoImageView.setId(String.valueOf(i)); // Asignar el índice como ID
-            contador++;
-            HBOXJugador.getChildren().add(nuevoImageView);
-        }
-    }
-
 
 
     @FXML
@@ -117,7 +102,7 @@ public class EscenaJuegoControlador {
      * @author Marco Argonis
      */
     @FXML
-    private void robar2() {
+    private void robar() {
         String IDCarta=desencriptarMazo();
         ImageView nuevoImageView = new ImageView();
         Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+IDCarta+".jpg")));
@@ -130,24 +115,6 @@ public class EscenaJuegoControlador {
         HBOXJugador.getChildren().add(nuevoImageView);
     }
 
-    @FXML
-    private void robar() {
-
-
-        // Obtener la ID de la nueva carta robada
-        String IDCarta = desencriptarMazo();
-        ImageView nuevoImageView = new ImageView();
-        Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + IDCarta + ".jpg")));
-        nuevoImageView.setImage(nuevaCarta);
-        nuevoImageView.setOnMouseClicked(event -> descartarCarta(nuevoImageView));
-        nuevoImageView.setFitHeight(100);
-        nuevoImageView.setFitWidth(50);
-        nuevoImageView.setId(String.valueOf(HBOXJugador.getChildren().size())); // Asignar el índice actual como ID
-        HBOXJugador.getChildren().add(nuevoImageView);
-
-        usarJugador.mostrarBarajaJugador(usar.mazoJugador); // Mostrar el mazo actualizado por consola
-    }
-
 
 
     /**
@@ -157,7 +124,7 @@ public class EscenaJuegoControlador {
      * en el HBOXMazo, si no hay, solo hace add, si la hay, un remove
      * @author Marco Argonis
      */
-    private void descartarCarta2(ImageView carta) {
+    private void descartarCarta(ImageView carta) {
         int numeroID;
         HBOXJugador.getChildren().remove(carta);
         if (cartaActual != null) {
@@ -168,26 +135,9 @@ public class EscenaJuegoControlador {
         numeroID=cifrarCartas(cartaActual.getId());
         usarJugador.descartarCartasJugador(usar,numeroID);
         usarJugador.mostrarBarajaJugador(usar.mazoJugador);
-        System.out.println("Bandera"+numeroID);
         //System.out.println(+"\n");
 
     }
-    private void descartarCarta(ImageView carta) {
-        int numeroID = Integer.parseInt(carta.getId());
-        usarJugador.descartarCartasJugador(usar, numeroID);
-        HBOXJugador.getChildren().remove(carta);
-        actualizarIdsCartas(); // Actualizar los IDs después de eliminar una carta
-
-        if (cartaActual != null) {
-            HBOXMazo.getChildren().remove(cartaActual);
-        }
-        cartaActual = carta;
-        HBOXMazo.getChildren().add(cartaActual);
-
-        usarJugador.mostrarBarajaJugador(usar.mazoJugador);
-        System.out.println("Bandera " + numeroID);
-    }
-
 
     private int cifrarCartas(String id) {
         String numero="" ,color="",accion="";
@@ -246,14 +196,6 @@ public class EscenaJuegoControlador {
         return resultado;
 
     }
-
-    private void actualizarIdsCartas() {
-        for (int i = 0; i < HBOXJugador.getChildren().size(); i++) {
-            ImageView carta = (ImageView) HBOXJugador.getChildren().get(i);
-            carta.setId(String.valueOf(i));
-        }
-    }
-
 
 
 }
