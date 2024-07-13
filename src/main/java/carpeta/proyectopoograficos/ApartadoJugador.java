@@ -237,6 +237,13 @@ public class ApartadoJugador {
         contenido.mazoJugador.remove(i);
     }
 
+    public void descartarCartasMazo(ControlCartas contenido, int numeroID) {
+        int i=numeroID;
+        CartaBlanca numero = contenido.mazo.get(i);
+        contenido.mazoMontana.addFirst(numero);
+        contenido.mazo.remove(i);
+    }
+
     /**
      * para ver la carta seleccionada por el jugador 1
      *

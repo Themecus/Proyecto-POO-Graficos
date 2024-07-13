@@ -25,10 +25,16 @@ public class EscenaJuegoControlador {
     private int contador=0;
     @FXML
     private void initialize() {//esto inicialiamos un juego estandar, osea 7 cartas
+
         usar.crearCartas();
         usar.barajearBarajaDeCartas();
+        mostrarCartaInicialEnPila();
         usar.repartirCartas();
+
         repartirGraficos();
+        //agregarCartaInicialAlMazo();
+
+
         usarJugador.mostrarBarajaJugador(usar.mazoJugador);
 
     }
@@ -48,6 +54,12 @@ public class EscenaJuegoControlador {
             HBOXJugador.getChildren().add(nuevoImageView);
         }
     }
+    private void repartirGraficosMazo(){
+        ImageView nuevoImageView = new ImageView();
+        Image nuevaImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazo()+".jpg")));
+        cartaActual.setImage(nuevaImage);
+        HBOXMazo.getChildren().add(cartaActual);
+    }
     private void repartirGraficos() {
         for (int i = 0; i < 7; i++) {
             ImageView nuevoImageView = new ImageView();
@@ -61,6 +73,31 @@ public class EscenaJuegoControlador {
             HBOXJugador.getChildren().add(nuevoImageView);
         }
     }
+
+    public void agregarCartaInicialAlMazo(){
+        ImageView nuevoImageView = new ImageView();
+        Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + desencriptarMazo() + ".jpg")));
+        nuevoImageView.setImage(nuevaCarta);
+        nuevoImageView.setOnMouseClicked(event -> descartarCartaMazo(nuevoImageView));
+        nuevoImageView.setFitHeight(100);
+        nuevoImageView.setFitWidth(50);
+        nuevoImageView.setId(String.valueOf(0)); // Asignar el índice como ID
+        contador++;
+        HBOXJugador.getChildren().add(nuevoImageView);
+    }
+    // En algún lugar apropiado (por ejemplo, en el método de inicialización):
+    /*private void agregarCartaInicialAlMazo() {
+        CartaBlanca cartaInicial = usar.mazoJugador.getFirst(); // Toma la primera carta del mazo
+        ImageView cartaInicialView = new ImageView();
+        Image imagenCartaInicial = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + desencriptarMazoInicial(0) + ".jpg")));
+        cartaInicialView.setImage(imagenCartaInicial);
+        cartaInicialView.setOnMouseClicked(event -> descartarCarta(cartaInicialView)); // Asigna el evento de clic
+        cartaInicialView.setFitHeight(100);
+        cartaInicialView.setFitWidth(50);
+        cartaInicialView.setId(String.valueOf(0)); // Asignar el índice como ID
+        contador++;
+        HBOXMazo.getChildren().add(cartaInicialView); // Agrega al HBOXMazo
+    }*/
 
 
 
@@ -188,6 +225,21 @@ public class EscenaJuegoControlador {
         System.out.println("Bandera " + numeroID);
     }
 
+    private void descartarCartaMazo(ImageView carta) {
+        int numeroID = Integer.parseInt(carta.getId());
+        usarJugador.descartarCartasMazo(usar, numeroID);
+        actualizarIdsCartas(); // Actualizar los IDs después de eliminar una carta
+
+        if (cartaActual != null) {
+            HBOXMazo.getChildren().remove(cartaActual);
+        }
+        cartaActual = carta;
+        HBOXMazo.getChildren().add(cartaActual);
+
+        //usarJugador.mostrarBarajaJugador(usar.mazoJugador);
+        System.out.println("Bandera " + numeroID);
+    }
+
 
     private int cifrarCartas(String id) {
         String numero="" ,color="",accion="";
@@ -253,6 +305,18 @@ public class EscenaJuegoControlador {
             carta.setId(String.valueOf(i));
         }
     }
+
+    private void mostrarCartaInicialEnPila() {
+        ImageView nuevoImageView = new ImageView();
+        Image cartaInicial = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + desencriptarMazo() + ".jpg")));
+        nuevoImageView.setImage(cartaInicial);
+        nuevoImageView.setFitHeight(100);
+        nuevoImageView.setFitWidth(50);
+        cartaActual = nuevoImageView;
+        HBOXMazo.getChildren().add(cartaActual);
+}
+
+
 
 
 
