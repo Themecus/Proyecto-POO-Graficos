@@ -1,1 +1,1 @@
-{"mazoJugador":["{\"color\":\"G\",\"contadorCarta\":1}","{\"color\":\"G\",\"contadorCarta\":4}","{\"accion\":\"S\",\"color\":\"B\",\"contadorCarta\":0}","{\"accion\":\"S\",\"color\":\"Y\",\"contadorCarta\":0}","{\"accion\":\"V\",\"color\":\"Y\",\"contadorCarta\":0}"]}
+{"mazoJugador":[{"color":"R","contadorCarta":3},{"color":"B","contadorCarta":4},{"color":"Y","contadorCarta":8},{"accion":"S","color":"B","contadorCarta":0},{"accion":"T2","color":"G","contadorCarta":0},{"accion":"V","color":"B","contadorCarta":0},{"accion":"S","color":"Y","contadorCarta":0}]}

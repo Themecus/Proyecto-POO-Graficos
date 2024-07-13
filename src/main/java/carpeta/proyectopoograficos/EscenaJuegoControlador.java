@@ -29,7 +29,9 @@ public class EscenaJuegoControlador {
         usar.barajearBarajaDeCartas();
         usar.repartirCartas();
         repartirGraficos();
+
     }
+
 
     private void repartirGraficos() {//para hacer que lo que salga por consola tenga sentido en la pantalla, rojas rojas y asi
 

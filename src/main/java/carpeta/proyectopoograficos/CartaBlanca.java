@@ -47,12 +47,12 @@ public abstract class CartaBlanca {
     public abstract boolean puedeSerJugada(CartaBlanca cartaMontana, int tamanoMazoJugador);
 
     //Convertir en formato valido para JSON
-    public String toJson() {
+    public JSONObject toJson() {
         JSONObject cartaJson = new JSONObject();
         cartaJson.put("contadorCarta", contadorCarta);
         cartaJson.put("color", color);
         cartaJson.put("accion", accion);
-        return cartaJson.toString();
+        return cartaJson;
     }
     //Convertir en formato valido para JSON
 }

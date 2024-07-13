@@ -43,20 +43,20 @@ public class Menu {
             switch (opcion) {
                 case 1:
                     if (!nombre.isEmpty()) {
+                        boolean crearPartida = true;
                         System.out.println("\n");
-                        acceder.tableroDeJuego(nombre);
+                        acceder.tableroDeJuego(nombre,crearPartida);
 
                     } else {
                         System.out.println("Por favor, escriba su nombre antes de iniciar una nueva partida.");
                     }
                     break;
                 case 2:
-
+                    boolean cargarPartida = false;
                     String aux = acceder2.cargarNombre();
                     System.out.println("Hola, que gusto verte de nuevo "+ aux);
-                    acceder.tableroDeJuego(aux);
-
-
+                    acceder.tableroDeJuego(aux, cargarPartida);
+                    //System.out.println("Funcionalidad de cargar partida aun no implementada.");
                     break;
                 case 3:
                     System.out.print("Dime tu nombre: ");
