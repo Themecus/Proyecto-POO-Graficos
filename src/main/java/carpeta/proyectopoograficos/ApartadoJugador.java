@@ -1,6 +1,7 @@
 package carpeta.proyectopoograficos;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ApartadoJugador {
@@ -148,16 +149,42 @@ public class ApartadoJugador {
      */
 
     public int rastrearCarta(LinkedList<CartaBlanca> mazoJugador,String numero,String color,String accion) {//aquiiiiiiii
+        System.out.println("carta info= "+color+" "+numero+" "+accion);
+
         for (int i = 0; i < mazoJugador.size(); i++) {
-            if (mazoJugador.get(i).getContadorCarta()==Integer.parseInt(numero) ) {
+
+           if(Objects.equals(mazoJugador.get(i).getColor(), color))
+            {
+                if(Objects.equals(mazoJugador.get(i).getAccion(), accion))
+                {
+                    return i;
+                }
+
+            }
+
+            if(Objects.equals(mazoJugador.get(i).getAccion(), accion)){
                 return i;
             }
 
+        }
 
+        if(numero!=""){
+            for (int i = 0; i < mazoJugador.size(); i++) {
+
+
+                if (Objects.equals(mazoJugador.get(i).getColor(), color)){
+
+                    if(Objects.equals(mazoJugador.get(i).getContadorCarta(), Integer.parseInt(numero))){
+                        return i;
+                    }
+
+                }
+            }
 
         }
-        return -5;
-    }
+
+        return-5;
+}
 
     /**
      * Un metodo para estar al tanto de cuantas cartas quedan en mazo del jugador 1
