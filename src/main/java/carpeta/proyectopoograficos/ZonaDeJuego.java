@@ -22,10 +22,15 @@ public class ZonaDeJuego {
      *               se dirija al usuario
      * @author Miguel Canache
      */
-    public void tableroDeJuego(String nombre) {
-        usar.crearCartas();
-        usar.barajearBarajaDeCartas();
-        usar.repartirCartas();
+    public void tableroDeJuego(String nombre, boolean crearOcargarPartida) {
+        if(crearOcargarPartida==true){
+            usar.crearCartas();
+            usar.barajearBarajaDeCartas();
+            usar.repartirCartas();
+        } else {
+            //usar.cargarMazoMontana();
+            usar.cargarPartida();
+        }
 
 
         while (infinito == 0) {

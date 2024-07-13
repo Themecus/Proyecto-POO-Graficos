@@ -321,98 +321,72 @@ public class ControlCartas {
     }
     //Gestion del nombre jugador (Guardar y cargar)
     /**
-     * metodo que basicamente guarda el LinkedList mazoJugador en
-     * un archivo llamado mazoJugador.json en la carpeta datos
-     * ubicada en el proyecto
+     * metodo que basicamente guarda el LinkedList mazo que necesites guardar en
+     * un archivo que se elija en la carpeta datosubicada en el proyecto
+     * @param mazos es el mazo que se va a guardar
+     * @param nombreArchivo el archivo en el que se guardara
+     * @param mazoGuardar la clave del objeto que quieres guardar
      * @author Marco Argonis
      */
 
-    public void guardarMazoJugador(){
+    public void guardarMazos(LinkedList<CartaBlanca> mazos, String nombreArchivo, String mazoGuardar ){
         JSONObject partida = new JSONObject();
         JSONArray jsonArrayJugador = new JSONArray();
-        for (CartaBlanca carta : mazoJugador) {
+        for (CartaBlanca carta : mazos) {
             jsonArrayJugador.put(carta.toJson());
         }
-        partida.put("mazoJugador", jsonArrayJugador);
-        try (FileWriter file = new FileWriter("datos/mazoJugador.json")) {
+        partida.put(mazoGuardar, jsonArrayJugador);
+        try (FileWriter file = new FileWriter("datos/"+nombreArchivo+".json")) {
             file.write(partida.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * metodo que basicamente guarda el LinkedList mazoRival en
-     * un archivo llamado mazoRival.json en la carpeta datos
-     * ubicada en el proyecto
-     * @author Marco Argonis
-     */
-    public void guardarMazoRival(){
-        JSONObject partida = new JSONObject();
-        JSONArray jsonArrayRival = new JSONArray();
-        for (CartaBlanca carta : mazoRival) {
-            jsonArrayRival.put(carta.toJson());
-        }
-        partida.put("mazoRival", jsonArrayRival);
-        try (FileWriter file = new FileWriter("datos/mazoRival.json")) {
-            file.write(partida.toString());
+
+    public void guardarPartida() {
+        guardarMazos(mazoJugador,"mazoJugador","mazoJugador");
+        guardarMazos(mazoRival,"mazoRival","mazoRival");
+        guardarMazos(mazoMontana,"mazoMontana","mazoMontana");
+        guardarMazos(mazo,"mazo","mazo");
+    }
+
+    public void cargarMazos(LinkedList<CartaBlanca> mazos, String nombreArchivo, String mazoBuscar){
+        mazos.clear();
+        try (FileReader reader = new FileReader("datos/"+nombreArchivo+".json")) {
+            JSONObject partida = new JSONObject(new JSONTokener(reader));
+            JSONArray jsonArrayJugador = partida.getJSONArray(mazoBuscar);
+            for (int i = 0; i < jsonArrayJugador.length(); i++) {
+                JSONObject cartaJson = jsonArrayJugador.getJSONObject(i);
+                mazos.add(crearCartaDesdeJson(cartaJson));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
-    /**
-     * metodo que basicamente guarda el LinkedList mazoMontana en
-     * un archivo llamado mazoMontana.json en la carpeta datos
-     * ubicada en el proyecto. el mazoMontana es el lugar donde se van
-     * colocando las cartas
-     * @author Marco Argonis
-     */
-    public void guardarMazoMontana(){
-        JSONObject partida = new JSONObject();
-        JSONArray jsonArrayMontana = new JSONArray();
-        for (CartaBlanca carta : mazoMontana) {
-            jsonArrayMontana.put(carta.toJson());
-        }
-        partida.put("mazoMontana", jsonArrayMontana);
-        try (FileWriter file = new FileWriter("datos/mazoMontana.json")) {
-            file.write(partida.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
+
+    private CartaBlanca crearCartaDesdeJson(JSONObject cartaJson) {
+        int contadorCarta = cartaJson.getInt("contadorCarta");
+        String color = cartaJson.optString("color", null);
+        String accion = cartaJson.optString("accion", null);
+
+        if (accion == null) {
+            return new CartaNumerica(contadorCarta, color, null);
+        } else if (accion.equals("V") || accion.equals("S") || accion.equals("CT2")) {
+            return new CartaAccion(contadorCarta, color, accion);
+        } else if (accion.equals("CC") || accion.equals("CT4")) {
+            return new CartaComodin(contadorCarta, color, accion);
+        } else {
+            return new CartaNumerica(contadorCarta, color, null);
         }
     }
-    /**
-     * metodo que basicamente guarda el LinkedList mazo en
-     * un archivo llamado mazo.json en la carpeta datos
-     * ubicada en el proyecto. el mazo es de donde se agarran las cartas
-     * cuando el jugador y/o rival se queda sin cartas
-     * @author Marco Argonis
-     */
-    public void guardarMazo(){
-        JSONObject partida = new JSONObject();
-        JSONArray jsonArrayMazo = new JSONArray();
-        for (CartaBlanca carta : mazo) {
-            jsonArrayMazo.put(carta.toJson());
-        }
-        partida.put("mazo", jsonArrayMazo);
-        try (FileWriter file = new FileWriter("datos/mazo.json")) {
-            file.write(partida.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    /**
-     * metodo que llama los 4 metodos anteriores en un solo metodo
-     * y lo que hace es que es llamado en la clase ZonaDeJuegos
-     * en el case 2, los mazos estan guardados en archivos diferentes
-     * pero para no llamar los 4 metodos, solo llamo este
-     * para mas comodidad
-     * @author Marco Argonis
-     */
-    public void guardarPartida(){
-        guardarMazoJugador();
-        guardarMazoRival();
-        guardarMazoMontana();
-        guardarMazo();
+    public void cargarPartida(){
+        cargarMazos(mazoJugador,"mazoJugador","mazoJugador");
+        cargarMazos(mazoRival,"mazoRival","mazoRival");
+        cargarMazos(mazoMontana,"mazoMontana","mazoMontana");
+        cargarMazos(mazo,"mazo","mazo");
     }
 
     /**
