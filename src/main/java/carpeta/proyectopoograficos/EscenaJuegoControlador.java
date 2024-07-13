@@ -34,10 +34,11 @@ public class EscenaJuegoControlador {
         usar.repartirCartas();
 
         repartirGraficos();
-       repartirGraficosRival();
+        repartirGraficosRival();
 
         usarJugador.mostrarBarajaJugador(usar.mazoJugador);
-        //usarRival.mostrarBarajaRival(usar.mazoRival);
+        System.out.println();
+        usarRival.mostrarBarajaRival(usar.mazoRival);
     }
 
 
@@ -69,7 +70,7 @@ public class EscenaJuegoControlador {
             HBOXJugador.getChildren().add(nuevoImageView);
         }
     }
-    private void repartirGraficosRival() {
+    private void repartirGraficosRival5() {
         for (int i = 0; i < 7; i++) {
             ImageView nuevoImageView = new ImageView();
             Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/ReversoCarta.jpg")));
@@ -80,6 +81,20 @@ public class EscenaJuegoControlador {
             HBOXRival.getChildren().add(nuevoImageView);
         }
     }
+
+    private void repartirGraficosRival() {
+        for (int i = 0; i < usar.mazoRival.size(); i++) {
+            ImageView nuevoImageView = new ImageView();
+            Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/ReversoCarta.jpg")));
+            nuevoImageView.setImage(nuevaCarta);
+            nuevoImageView.setFitHeight(100);
+            nuevoImageView.setFitWidth(50);
+            nuevoImageView.setId(String.valueOf(i));
+            HBOXRival.getChildren().add(nuevoImageView);
+        }
+    }
+
+
 
 
     @FXML
@@ -271,6 +286,7 @@ public class EscenaJuegoControlador {
         // Si la carta jugada requiere que el rival tome dos cartas
         if (cartaSeleccionada.getAccion() != null && cartaSeleccionada.getAccion().equals("T2")) {
             tomaDosCartasRival();
+            usarRival.mostrarBarajaRival(usar.mazoRival);
         }
     }
 
@@ -349,6 +365,7 @@ public class EscenaJuegoControlador {
             nuevoImageView.setFitWidth(50);
             HBOXRival.getChildren().add(nuevoImageView);
         }
+
     }
 
 
