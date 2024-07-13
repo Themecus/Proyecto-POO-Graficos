@@ -4,17 +4,16 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane onMouseClicked="#robar" prefHeight="442.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carpeta.proyectopoograficos.EscenaJuegoControlador">
+<AnchorPane prefHeight="442.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="carpeta.proyectopoograficos.EscenaJuegoControlador">
    <children>
       <HBox fx:id="HBOXJugador" alignment="TOP_CENTER" layoutX="19.0" layoutY="300.0" prefHeight="127.0" prefWidth="562.0" style="-fx-background-color: blue;" />
-      <HBox fx:id="HBOXMazo" layoutX="96.0" layoutY="171.0" prefHeight="100.0" prefWidth="71.0" style="-fx-background-color: red;" />
-      <ImageView fitHeight="127.0" fitWidth="71.0" layoutX="390.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
+      <HBox fx:id="HBOXMazo" layoutX="86.0" layoutY="171.0" prefHeight="100.0" prefWidth="71.0" style="-fx-background-color: red;" />
+      <Button fx:id="btoRobar" layoutX="23.0" layoutY="208.0" mnemonicParsing="false" onAction="#robar" text="Robar" />
+      <ImageView fitHeight="127.0" fitWidth="71.0" layoutX="168.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@CartasUno/ReversoCarta.jpg" />
          </image>
       </ImageView>
       <HBox fx:id="HBOXRival" layoutX="23.0" layoutY="24.0" prefHeight="106.0" prefWidth="562.0" style="-fx-background-color: yellow;" />
-      <Label layoutX="481.0" layoutY="171.0" prefHeight="18.0" prefWidth="100.0" text="Precione esta carta" />
-      <Label layoutX="481.0" layoutY="149.0" prefHeight="18.0" prefWidth="100.0" text="Para robar cartas" />
    </children>
 </AnchorPane>
