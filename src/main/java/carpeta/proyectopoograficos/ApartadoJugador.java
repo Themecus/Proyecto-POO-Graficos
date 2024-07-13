@@ -1,6 +1,7 @@
 package carpeta.proyectopoograficos;
 
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ApartadoJugador {
@@ -139,6 +140,7 @@ public class ApartadoJugador {
                 System.out.print(mazoJugador.get(i).getAccion() + " | ");
             }
         }
+        System.out.println();
     }
 
     /**
@@ -147,17 +149,52 @@ public class ApartadoJugador {
      * @author Miguel Canache
      */
 
-    public int rastrearCarta(LinkedList<CartaBlanca> mazoJugador,String numero,String color,String accion) {//aquiiiiiiii
+    public int rastrearCarta2(LinkedList<CartaBlanca> mazoJugador,String numero,String color,String accion) {//aquiiiiiiii
         for (int i = 0; i < mazoJugador.size(); i++) {
             if (mazoJugador.get(i).getContadorCarta()==Integer.parseInt(numero) ) {
                 return i;
             }
-
+            if (mazoJugador.get(i).getAccion()==accion){
+                return i;
+            }
 
 
         }
         return -5;
     }
+
+    public int rastrearCarta(LinkedList<CartaBlanca> mazoJugador,String numero,String color,String accion) {//aquiiiiiiii
+        System.out.println("carta info= "+color+" "+numero+" "+accion);
+
+        for (int i = 0; i < mazoJugador.size(); i++) {
+
+            if(Objects.equals(mazoJugador.get(i).getAccion(), accion) && Objects.equals(mazoJugador.get(i).getColor(), color)&&Objects.equals(mazoJugador.get(i).getContadorCarta(), numero))
+            {
+                return i;
+            }
+
+            if(Objects.equals(mazoJugador.get(i).getAccion(), accion)){
+                return i;
+            }
+
+
+        }
+
+        if(numero!=""){
+            for (int i = 0; i < mazoJugador.size(); i++) {
+
+
+                if (Objects.equals(mazoJugador.get(i).getContadorCarta(), Integer.parseInt(numero)) ){
+                    return i;
+                }
+            }
+
+        }
+
+        return-5;
+    }
+
+
 
     /**
      * Un metodo para estar al tanto de cuantas cartas quedan en mazo del jugador 1
