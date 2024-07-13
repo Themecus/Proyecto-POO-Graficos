@@ -306,7 +306,7 @@ public class EscenaJuegoControlador {
         }
     }
 
-    private void mostrarCartaInicialEnPila() {
+  /*  private void mostrarCartaInicialEnPila() {
         ImageView nuevoImageView = new ImageView();
         Image cartaInicial = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + desencriptarMazo() + ".jpg")));
         nuevoImageView.setImage(cartaInicial);
@@ -314,8 +314,36 @@ public class EscenaJuegoControlador {
         nuevoImageView.setFitWidth(50);
         cartaActual = nuevoImageView;
         HBOXMazo.getChildren().add(cartaActual);
-}
+    }*/
+  private void mostrarCartaInicialEnPila() {
+      CartaBlanca cartaInicial;
+      do {
+          cartaInicial = usar.mazo.remove(0); // Remover la primera carta del mazo
+          usar.mazo.add(cartaInicial); // Añadirla al final del mazo
+      } while (cartaInicial instanceof CartaAccion || cartaInicial instanceof CartaComodin);
 
+      usar.mazoMontana.addFirst(cartaInicial); // Añadir la carta válida a la montaña
+
+      ImageView nuevoImageView = new ImageView();
+      Image cartaImagen = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + getCartaNombre(cartaInicial) + ".jpg")));
+      nuevoImageView.setImage(cartaImagen);
+      nuevoImageView.setFitHeight(100);
+      nuevoImageView.setFitWidth(50);
+      cartaActual = nuevoImageView;
+      HBOXMazo.getChildren().add(cartaActual);
+  }
+
+    private String getCartaNombre(CartaBlanca carta) {
+        String nombre = "";
+        if (carta.getAccion() == null) {
+            nombre = "C" + carta.getColor() + carta.getContadorCarta();
+        } else if (!carta.getAccion().equals("T4") && !carta.getAccion().equals("C")) {
+            nombre = "C" + carta.getColor() + carta.getAccion();
+        } else if (carta.getAccion().equals("T4") || carta.getAccion().equals("C")) {
+            nombre = "C" + carta.getAccion();
+        }
+        return nombre;
+   }
 
 
 
