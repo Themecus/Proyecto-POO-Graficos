@@ -6,18 +6,35 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+import java.util.LinkedList;
 import java.util.Objects;
 
 
 
 public class EscenaJuegoControlador {
 
-    @FXML
-    private HBox HBOXJugador;
-    @FXML
-    private HBox HBOXMazo;
-    private ImageView cartaActual;
-    public Button btoRobar;
+    public ImageView carta1;
+    public ImageView carta2;
+    public ImageView carta3;
+    public ImageView carta4;
+    public ImageView carta5;
+    public ImageView carta6;
+    public ImageView carta7;
+    public ImageView carta8;
+    public ImageView descarte;
+    public ImageView carta9;
+    public ImageView carta11;
+    public ImageView carta12;
+    public ImageView carta10;
+    public ImageView carta13;
+    public ImageView carta14;
+    public ImageView carta15;
+    public ImageView carta16;
+    public ImageView carta17;
+    public ImageView carta18;
+    public ImageView carta19;
+    public ImageView carta20;
+    LinkedList<ImageView> mazo= new LinkedList<ImageView>();
 
     ControlCartas usar = new ControlCartas();
     ApartadoJugador usarJugador= new ApartadoJugador();
@@ -28,23 +45,37 @@ public class EscenaJuegoControlador {
         usar.crearCartas();
         usar.barajearBarajaDeCartas();
         usar.repartirCartas();
-        repartirGraficos();
+        Image image;
+        mazo.add(carta1);
+        mazo.add(carta2);
+        mazo.add(carta3);
+        mazo.add(carta4);
+        mazo.add(carta5);
+        mazo.add(carta6);
+        mazo.add(carta7);
+        mazo.add(carta8);
+        mazo.add(carta9);
+        mazo.add(carta10);
+        mazo.add(carta11);
+        mazo.add(carta12);
+        mazo.add(carta13);
+        mazo.add(carta14);
+        mazo.add(carta15);
+        mazo.add(carta16);
+        mazo.add(carta17);
+        mazo.add(carta18);
+        mazo.add(carta19);
+        mazo.add(carta20);
+        mazo.get(0).setImage(image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazoInicial(0)+".jpg"))));
+        mazo.get(1).setImage(image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazoInicial(1)+".jpg"))));
+        mazo.get(2).setImage(image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazoInicial(2)+".jpg"))));
+        mazo.get(3).setImage(image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazoInicial(3)+".jpg"))));
+        mazo.get(4).setImage(image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazoInicial(4)+".jpg"))));
+        mazo.get(5).setImage(image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazoInicial(5)+".jpg"))));
+        mazo.get(6).setImage(image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazoInicial(6)+".jpg"))));
+
     }
 
-    private void repartirGraficos() {//para hacer que lo que salga por consola tenga sentido en la pantalla, rojas rojas y asi
-
-        for (int i = 0; i < 7; i++) {
-            ImageView nuevoImageView = new ImageView();
-            Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazoInicial(i)+".jpg")));
-            nuevoImageView.setImage(nuevaCarta);
-            nuevoImageView.setOnMouseClicked(event -> descartarCarta(nuevoImageView));
-            nuevoImageView.setFitHeight(100);
-            nuevoImageView.setFitWidth(50);
-            nuevoImageView.setId(desencriptarMazoInicial(i));
-            contador++;
-            HBOXJugador.getChildren().add(nuevoImageView);
-        }
-    }
 
 
     @FXML
@@ -86,112 +117,184 @@ public class EscenaJuegoControlador {
         if (usar.mazoJugador.get(i).getAccion() == "T4" || usar.mazoJugador.get(i).getAccion() == "C") {
             nombre="C"+usar.mazoJugador.get(i).getAccion();
         }
-        //usarJugador.mostrarBarajaJugador(usar.mazoJugador);
+
         return nombre;
 
     }
 
-    /**
-     * Metodo para robar cartas pero de manera dinamica, es la version 2, funciona de la siguiente manera,
-     * primero creas un ImageView, para efectos practicos, llamado nuevoImageView, luego se configura la ruta creando
-     * un objeto Image llamado nuevaCarta, que tiene de diferente? que se agrega una accion a la carta
-     * por ultimo se agrega al HBox que es el HBox del jugador, es igual al anterior pero se le agrega lo de la accion
-     * en las cartas dinamicas
-     * @author Marco Argonis
-     */
-    @FXML
-    private void robar() {
-        String IDCarta=desencriptarMazo();
-        ImageView nuevoImageView = new ImageView();
-        Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+IDCarta+".jpg")));
-        nuevoImageView.setImage(nuevaCarta);
-        nuevoImageView.setOnMouseClicked(event -> descartarCarta(nuevoImageView));
-        nuevoImageView.setFitHeight(100);
-        nuevoImageView.setFitWidth(50);
-        nuevoImageView.setId(IDCarta);
-        contador++;
-        HBOXJugador.getChildren().add(nuevoImageView);
+
+    public void rellenar() {
+        int contador=0;
+        Image image;
+        while(contador!=20)
+        {
+            if(mazo.get(contador).getImage()==null)
+            {
+                mazo.get(contador).setImage(image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/"+desencriptarMazo()+".jpg"))));
+                break;
+            }
+
+            contador++;
+        }
     }
 
-
-
-    /**
-     * El metodo descartar cartas pero mejorado, ya que la carta que elimine la agrega en HBOXMazo, con la
-     * peculiaridad que reemplaza la que ya este
-     * Primero eliminas la carta del HBox jugador, y haces un si condicional para varificar si hay una carta ahi
-     * en el HBOXMazo, si no hay, solo hace add, si la hay, un remove
-     * @author Marco Argonis
-     */
-    private void descartarCarta(ImageView carta) {
-        int numeroID;
-        HBOXJugador.getChildren().remove(carta);
-        if (cartaActual != null) {
-            HBOXMazo.getChildren().remove(cartaActual);
+    public void descartar0() {
+        if(mazo.get(0).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(0).getImage());
+            mazo.get(0).setImage(null);
         }
-        cartaActual = carta;
-        HBOXMazo.getChildren().add(cartaActual);
-        numeroID=cifrarCartas(cartaActual.getId());
-        usarJugador.descartarCartasJugador(usar,numeroID);
-        usarJugador.mostrarBarajaJugador(usar.mazoJugador);
-        //System.out.println(+"\n");
+    }
+    public void descartar1() {
+        if(mazo.get(1).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(1).getImage());
+            mazo.get(1).setImage(null);
+        }
 
     }
-
-    private int cifrarCartas(String id) {
-        String numero="" ,color="",accion="";
-        int resultado = 0;
-        int contador=1;
-
-        while(contador!=id.length()){
-            if((id.charAt(contador)=='B'||id.charAt(contador)=='R'||id.charAt(contador)=='G'||id.charAt(contador)=='Y'))
-            {
-                color= String.valueOf(id.charAt(contador));
-            }
-
-            if (id.charAt(contador) >= '0' && id.charAt(contador) <= '9'&& id.charAt(contador-1) !='T') {
-                numero=String.valueOf(id.charAt(contador));
-            }
-
-            if(((id.charAt(contador)=='T')&&(id.charAt(contador+1)=='2'))){
-                accion=String.valueOf(id.charAt(contador));
-                if(id.charAt(contador)=='T')
-                {
-                    accion=accion+"2";
-                }
-            }
-            if(id.charAt(contador)=='S'){
-                accion=String.valueOf(id.charAt(contador));
-            }
-            if(id.charAt(contador)=='V'){
-                accion=String.valueOf(id.charAt(contador));
-
-            }
-
-            if(id.charAt(contador)=='T'&&(id.charAt(contador+1)=='4'))
-            {
-                accion=String.valueOf(id.charAt(contador));
-                if(id.charAt(contador)=='T')
-                {
-                    accion=accion+"4";
-                }
-
-            }
-
-            if(id.charAt(contador)=='C')
-            {
-                accion=String.valueOf(id.charAt(contador));
-
-            }
-
-          contador++;
+    public void descartar2() {
+        if(mazo.get(2).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(2).getImage());
+            mazo.get(2).setImage(null);
         }
 
+    }
+    public void descartar3() {
+        if(mazo.get(3).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(3).getImage());
+            mazo.get(3).setImage(null);
+        }
 
-        resultado=usarJugador.rastrearCarta(usar.mazoJugador,numero,color,accion);
-        System.out.println("Posicion= "+resultado+"\n");
-        usarJugador.mostrarBarajaJugador(usar.mazoJugador);
-        System.out.println("\n");
-        return resultado;
+    }
+    public void descartar4() {
+        if(mazo.get(4).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(4).getImage());
+            mazo.get(4).setImage(null);
+        }
+
+    }
+    public void descartar5() {
+        if(mazo.get(5).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(5).getImage());
+            mazo.get(5).setImage(null);
+        }
+
+    }
+    public void descartar6() {
+        if(mazo.get(6).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(6).getImage());
+            mazo.get(6).setImage(null);
+        }
+
+    }
+    public void descartar7() {
+        if(mazo.get(7).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(7).getImage());
+            mazo.get(7).setImage(null);
+        }
+
+    }
+    public void descartar8() {
+        if(mazo.get(8).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(8).getImage());
+            mazo.get(8).setImage(null);
+        }
+
+    }
+    public void descartar9() {
+        if(mazo.get(9).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(9).getImage());
+            mazo.get(9).setImage(null);
+        }
+
+    }
+    public void descartar10() {
+        if(mazo.get(10).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(10).getImage());
+            mazo.get(10).setImage(null);
+        }
+
+    }
+    public void descartar11() {
+        if(mazo.get(11).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(11).getImage());
+            mazo.get(11).setImage(null);
+        }
+
+    }
+    public void descartar12() {
+        if(mazo.get(12).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(12).getImage());
+            mazo.get(12).setImage(null);
+        }
+    }
+
+    public void descartar13() {
+        if(mazo.get(13).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(13).getImage());
+            mazo.get(13).setImage(null);
+        }
+
+    }
+    public void descartar14() {
+        if(mazo.get(14).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(14).getImage());
+            mazo.get(14).setImage(null);
+        }
+
+    }
+    public void descartar15() {
+        if(mazo.get(15).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(15).getImage());
+            mazo.get(15).setImage(null);
+        }
+
+    }
+    public void descartar16() {
+        if(mazo.get(16).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(16).getImage());
+            mazo.get(16).setImage(null);
+        }
+
+    }
+    public void descartar17() {
+        if(mazo.get(17).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(17).getImage());
+            mazo.get(17).setImage(null);
+        }
+
+    }
+    public void descartar18() {
+        if(mazo.get(18).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(18).getImage());
+            mazo.get(18).setImage(null);
+        }
+
+    }
+    public void descartar19() {
+        if(mazo.get(19).getImage()!=null)
+        {
+            descarte.setImage(mazo.get(19).getImage());
+            mazo.get(19).setImage(null);
+        }
 
     }
 
