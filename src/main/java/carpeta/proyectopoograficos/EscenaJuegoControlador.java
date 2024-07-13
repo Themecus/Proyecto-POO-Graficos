@@ -16,8 +16,11 @@ public class EscenaJuegoControlador {
     private HBox HBOXJugador;
     @FXML
     private HBox HBOXMazo;
-    @FXML HBox HBOXRival;
+    @FXML
+    private HBox HBOXRival;
     private ImageView cartaActual;
+    private ImageView cartaActual2;
+
     public Button btoRobar;
 
     ControlCartas usar = new ControlCartas();
@@ -259,6 +262,7 @@ public class EscenaJuegoControlador {
         usarJugador.mostrarBarajaJugador(usar.mazoJugador);
         System.out.println("Bandera " + numeroID);
     }
+
     private void descartarCarta(ImageView cartaView) {
         int numeroID = Integer.parseInt(cartaView.getId());
         CartaBlanca cartaSeleccionada = usar.mazoJugador.get(numeroID);
@@ -288,7 +292,12 @@ public class EscenaJuegoControlador {
             tomaDosCartasRival();
             usarRival.mostrarBarajaRival(usar.mazoRival);
         }
+
+
+
+
     }
+
 
 
 
@@ -299,32 +308,32 @@ public class EscenaJuegoControlador {
         }
     }
 
-  /*  private void mostrarCartaInicialEnPila() {
+    /*  private void mostrarCartaInicialEnPila() {
+          ImageView nuevoImageView = new ImageView();
+          Image cartaInicial = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + desencriptarMazo() + ".jpg")));
+          nuevoImageView.setImage(cartaInicial);
+          nuevoImageView.setFitHeight(100);
+          nuevoImageView.setFitWidth(50);
+          cartaActual = nuevoImageView;
+          HBOXMazo.getChildren().add(cartaActual);
+      }*/
+    private void mostrarCartaInicialEnPila() {
+        CartaBlanca cartaInicial;
+        do {
+            cartaInicial = usar.mazo.remove(0); // Remover la primera carta del mazo
+            usar.mazo.add(cartaInicial); // Añadirla al final del mazo
+        } while (cartaInicial instanceof CartaAccion || cartaInicial instanceof CartaComodin);
+
+        usar.mazoMontana.addFirst(cartaInicial); // Añadir la carta válida a la montaña
+
         ImageView nuevoImageView = new ImageView();
-        Image cartaInicial = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + desencriptarMazo() + ".jpg")));
-        nuevoImageView.setImage(cartaInicial);
+        Image cartaImagen = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + getCartaNombre(cartaInicial) + ".jpg")));
+        nuevoImageView.setImage(cartaImagen);
         nuevoImageView.setFitHeight(100);
         nuevoImageView.setFitWidth(50);
         cartaActual = nuevoImageView;
         HBOXMazo.getChildren().add(cartaActual);
-    }*/
-  private void mostrarCartaInicialEnPila() {
-      CartaBlanca cartaInicial;
-      do {
-          cartaInicial = usar.mazo.remove(0); // Remover la primera carta del mazo
-          usar.mazo.add(cartaInicial); // Añadirla al final del mazo
-      } while (cartaInicial instanceof CartaAccion || cartaInicial instanceof CartaComodin);
-
-      usar.mazoMontana.addFirst(cartaInicial); // Añadir la carta válida a la montaña
-
-      ImageView nuevoImageView = new ImageView();
-      Image cartaImagen = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/" + getCartaNombre(cartaInicial) + ".jpg")));
-      nuevoImageView.setImage(cartaImagen);
-      nuevoImageView.setFitHeight(100);
-      nuevoImageView.setFitWidth(50);
-      cartaActual = nuevoImageView;
-      HBOXMazo.getChildren().add(cartaActual);
-  }
+    }
 
     private String getCartaNombre(CartaBlanca carta) {
         String nombre = "";
@@ -336,10 +345,10 @@ public class EscenaJuegoControlador {
             nombre = "C" + carta.getAccion();
         }
         return nombre;
-   }
+    }
 
     private boolean puedeSerJugada(CartaBlanca cartaSeleccionada, CartaBlanca cartaActualMontana) {
-        if (cartaSeleccionada.getColor().equals(cartaActualMontana.getColor()) ||
+             if (cartaSeleccionada.getColor().equals(cartaActualMontana.getColor()) ||
                 (cartaSeleccionada.getAccion() != null && cartaSeleccionada.getAccion().equals(cartaActualMontana.getAccion())) ||
                 (cartaSeleccionada.getAccion() == null && cartaSeleccionada.getContadorCarta() == cartaActualMontana.getContadorCarta()) ||
                 (cartaSeleccionada instanceof CartaComodin)) {
@@ -368,6 +377,26 @@ public class EscenaJuegoControlador {
 
     }
 
+    @FXML
+    public void tomacuatroCartasRival() {
+        int tomar = 0;
+
+        while (tomar != 4) {
+            CartaBlanca n2 = usar.mazo.get(0);
+            usar.mazoRival.add(n2);
+            usar.mazo.remove(n2);
+            tomar++;
+
+            // Crear el ImageView para la nueva carta del rival
+            ImageView nuevoImageView = new ImageView();
+            Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/ReversoCarta.jpg")));
+            nuevoImageView.setImage(nuevaCarta);
+            nuevoImageView.setFitHeight(100);
+            nuevoImageView.setFitWidth(50);
+            HBOXRival.getChildren().add(nuevoImageView);
+        }
+
+    }
 
 
 }
