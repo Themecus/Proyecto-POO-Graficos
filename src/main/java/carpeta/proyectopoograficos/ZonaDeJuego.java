@@ -142,7 +142,7 @@ public class ZonaDeJuego {
      */
     public void turnoRival() {
         usarRival.setAcceder(usar);
-        usarRival.condicionesRival();
+        //usarRival.condicionesRival();
     }
 
 

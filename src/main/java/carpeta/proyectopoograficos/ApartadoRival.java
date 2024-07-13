@@ -1,5 +1,7 @@
 package carpeta.proyectopoograficos;
 
+import java.util.LinkedList;
+
 public class ApartadoRival {
     ControlCartas acceder = new ControlCartas();
 
@@ -11,13 +13,11 @@ public class ApartadoRival {
         this.acceder = acceder;
     }
 
-
     /**
      * Si una carta de toma 2 se usa, el jugador 1 roba 2 cartas
      *
      * @author Miguel Canache
      */
-
     public void tomaDosCartasJugador() {
         int tomar = 0;
         while (tomar != 2) {
@@ -28,83 +28,81 @@ public class ApartadoRival {
         }
     }
 
+    /**
+     * Mostrar la baraja del rival
+     *
+     * @param mazoRival El mazo del rival
+     */
+    public void mostrarBarajaRival(LinkedList<CartaBlanca> mazoRival) {
+        for (int i = 0; i < mazoRival.size(); i++) {
+            CartaBlanca carta = mazoRival.get(i);
+            if (carta.getAccion() == null) {
+                System.out.print(carta.getContadorCarta() + "-" + carta.getColor() + " | ");
+            } else if (!carta.getAccion().equals("T4") && !carta.getAccion().equals("C")) {
+                System.out.print(carta.getAccion() + "-" + carta.getColor() + " | ");
+            } else {
+                System.out.print(carta.getAccion() + " | ");
+            }
+        }
+        System.out.println();
+    }
 
     /**
-     * Si una carta de toma 4, es usada por el rival, el jugador 1 toma 4 cartas,
-     * se le agregan 4 cartas al mazo del jugador, antes de eso, le pregunta
-     * al jugador rival que color quiere jugar ahora.
-     * Dependiendo de la opcion que elija, se cambia el atributo color
-     * de la carta al color que quiera el rival
+     * Si una carta de toma 4 se usa, el jugador 1 toma 4 cartas y cambia de color
      *
-     * @param option se usa para pasarle al metodo y
-     *               dependiendo de la opcion que eligiera el jugador, se cambia de color
-     *               en teoria, el parametro option es elegido por la maquina, es decir
-     *               deberia ser aleatorio.
+     * @param option El color seleccionado por el rival
      * @author Marco Argonis
      */
     public void tomarCuatroCartasJugador(String option) {
         int tomar = 0;
-        //cambiarDeColor(option);
         while (tomar != 4) {
             CartaBlanca n = acceder.mazo.get(0);
             acceder.mazoJugador.add(n);
             acceder.mazo.remove(n);
             tomar++;
         }
-
+        // Aquí deberías cambiar el color de la carta
+        // acceder.cambiarDeColor(option); // Asegúrate de que este método exista y funcione correctamente
     }
 
     /**
-     * Un metodo para estar al tanto de cuantas cartas quedan en mazo del jugador 2
+     * Verificar si el mazo del rival está vacío
      *
-     * @return Devuelve el estado del mazo jugador, falso si esta lleno y verdadero si esta lleno
+     * @return Verdadero si el mazo del rival está vacío, falso de lo contrario
      * @author Miguel Canache
      */
-
     public boolean estadoMazoRival() {
-        if (acceder.mazoRival.size() == 0) {
-            return true;
-        } else {
-
-            return false;
-        }
+        return acceder.mazoRival.size() == 0;
     }
 
-
     /**
-     * En caso de que se use una carta de toma 2, este metodo le agregara 2 cartas al jugador 1
+     * Robar cartas para el rival
      *
      * @author Miguel Canache
      */
-
     public void robarCartasRival() {
         CartaBlanca numero = acceder.mazo.get(0);
         acceder.mazoRival.addLast(numero);
         acceder.mazo.remove(numero);
     }
 
-
     /**
-     * Al final del turno del jugador 2, descarta una carta y la deja en el mazo de descarte
+     * Descartar una carta del rival
      *
-     * @param i Desde el metodo condicionesRival, se enviara que carta se saca
+     * @param contenido El control de cartas
+     * @param numeroID El índice de la carta a descartar
      * @author Miguel Canache
      */
-
-    public void descartarCartasRival(int i) {
-        CartaBlanca numero = acceder.mazoRival.get(i);
-        acceder.mazoMontana.addFirst(numero);
-        acceder.mazoRival.remove(i);
+    public void descartarCartasRival(ControlCartas contenido, int numeroID) {
+        CartaBlanca numero = contenido.mazoRival.get(numeroID);
+        contenido.mazoMontana.addFirst(numero);
+        contenido.mazoRival.remove(numeroID);
     }
 
-
     /**
-     * Cuando el jugador 2 juegue, aqui podra seleccionar que carta tirar, ver su mazo y ver la informacion
-     * de la carta que debe igualar, tanto por color, numero o accion, pero automatizado
-     *
-     * @author Miguel Canache
+     * Método de condiciones del rival (comentado, requiere revisión y adaptación)
      */
-
+    /*
     public void condicionesRival() {
         int tamanoAntes = acceder.mazoRival.size();
         String color;
@@ -124,10 +122,8 @@ public class ApartadoRival {
                     if (carta.getAccion().equals("CT2")) {
                         tomaDosCartasJugador();
                     } else if (carta.getAccion().equals("S")) {
-                        // cambiarSentido(carta, i);
                         cambiarElSentidoRival(i);
                     } else if (carta.getAccion().equals("r")) {
-                        // cancelarTurno(carta, i);
                         bloquearElTurnoRival(i);
                     }
                     descartarCartasRival(i);
@@ -142,37 +138,37 @@ public class ApartadoRival {
             robarCartasRival();
         }
     }
-
+    */
 
     /**
-     * funciona con recursividad simple, descarta la carta del jugador y
-     * luego llama el void condicionesJugador, saltando el turno
-     * rival, la misma logica se aplica para la siguiente
+     * Funciona con recursividad simple, descarta la carta del jugador y
+     * luego llama el void condicionesJugador, saltando el turno rival
      *
-     * @param cartaElegida lo pide descartarCartasJugador
+     * @param cartaElegida La carta elegida para cambiar el sentido
      * @author Marco Argonis
      */
-
+    /*
     public void cambiarElSentidoRival(int cartaElegida) {
-        System.out.println("El jugador 2 (maquina) a jugado cambiar el sentido");
+        System.out.println("El jugador 2 (maquina) ha jugado cambiar el sentido");
         System.out.println("vuelve a jugar el computador");
         descartarCartasRival(cartaElegida);
         condicionesRival();
     }
+    */
 
     /**
-     * funciona con recursividad simple, descarta la carta del jugador y
-     * luego llama el void condicionesJugador, saltando el turno
-     * rival
+     * Funciona con recursividad simple, descarta la carta del jugador y
+     * luego llama el void condicionesJugador, saltando el turno rival
      *
-     * @param cartaElegida lo pide descartarCartasJugador
+     * @param cartaElegida La carta elegida para bloquear el turno
      * @author Marco Argonis
      */
-
+    /*
     public void bloquearElTurnoRival(int cartaElegida) {
-        System.out.println("El jugador 2 (maquina) a jugado bloquear el turno al rival");
+        System.out.println("El jugador 2 (maquina) ha jugado bloquear el turno al rival");
         System.out.println("vuelve a jugar el computador");
         descartarCartasRival(cartaElegida);
         condicionesRival();
     }
+    */
 }

@@ -15,33 +15,6 @@
             <Image url="@CartasUno/ReversoCarta.jpg" />
          </image>
       </ImageView>
-      <HBox fx:id="HBOXRival" layoutX="86.0" layoutY="23.0" prefHeight="106.0" prefWidth="354.0">
-         <children>
-            <ImageView fitHeight="106.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@CartasUno/ReversoCarta.jpg" />
-               </image></ImageView>
-            <ImageView fitHeight="106.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@CartasUno/ReversoCarta.jpg" />
-               </image></ImageView>
-            <ImageView fitHeight="106.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@CartasUno/ReversoCarta.jpg" />
-               </image></ImageView>
-            <ImageView fitHeight="106.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@CartasUno/ReversoCarta.jpg" />
-               </image></ImageView>
-            <ImageView fitHeight="106.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@CartasUno/ReversoCarta.jpg" />
-               </image></ImageView>
-            <ImageView fitHeight="106.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@CartasUno/ReversoCarta.jpg" />
-               </image></ImageView>
-         </children>
-      </HBox>
+      <HBox fx:id="HBOXRival" layoutX="23.0" layoutY="24.0" prefHeight="106.0" prefWidth="562.0" style="-fx-background-color: yellow;" />
    </children>
 </AnchorPane>

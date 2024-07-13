@@ -16,27 +16,28 @@ public class EscenaJuegoControlador {
     private HBox HBOXJugador;
     @FXML
     private HBox HBOXMazo;
+    @FXML HBox HBOXRival;
     private ImageView cartaActual;
     public Button btoRobar;
 
     ControlCartas usar = new ControlCartas();
     ApartadoJugador usarJugador = new ApartadoJugador();
+    ApartadoRival usarRival = new ApartadoRival();
 
     private int contador = 0;
 
     @FXML
-    private void initialize() {//esto inicialiamos un juego estandar, osea 7 cartas
-
+    private void initialize() {
         usar.crearCartas();
         usar.barajearBarajaDeCartas();
         mostrarCartaInicialEnPila();
         usar.repartirCartas();
 
         repartirGraficos();
-
+       repartirGraficosRival();
 
         usarJugador.mostrarBarajaJugador(usar.mazoJugador);
-
+        //usarRival.mostrarBarajaRival(usar.mazoRival);
     }
 
 
@@ -66,6 +67,17 @@ public class EscenaJuegoControlador {
             nuevoImageView.setId(String.valueOf(i)); // Asignar el índice como ID
             contador++;
             HBOXJugador.getChildren().add(nuevoImageView);
+        }
+    }
+    private void repartirGraficosRival() {
+        for (int i = 0; i < 7; i++) {
+            ImageView nuevoImageView = new ImageView();
+            Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/ReversoCarta.jpg")));
+            nuevoImageView.setImage(nuevaCarta);
+            nuevoImageView.setFitHeight(100);
+            nuevoImageView.setFitWidth(50);
+            nuevoImageView.setId(String.valueOf(i));
+            HBOXRival.getChildren().add(nuevoImageView);
         }
     }
 
@@ -179,7 +191,7 @@ public class EscenaJuegoControlador {
         usarJugador.mostrarBarajaJugador(usar.mazoJugador);
         System.out.println("Bandera " + numeroID);
     }*/
-    private void descartarCarta(ImageView cartaView) {
+    private void descartarCarta3(ImageView cartaView) {
         int numeroID = Integer.parseInt(cartaView.getId());
         CartaBlanca cartaSeleccionada = usar.mazoJugador.get(numeroID);
         CartaBlanca cartaActualMontana = usar.mazoMontana.peekFirst(); // Obtener la carta actual en la montaña
@@ -204,6 +216,62 @@ public class EscenaJuegoControlador {
 
         usarJugador.mostrarBarajaJugador(usar.mazoJugador);
         System.out.println("Bandera " + numeroID);
+    }
+    private void descartarCarta4(ImageView cartaView) {
+        int numeroID = Integer.parseInt(cartaView.getId());
+        CartaBlanca cartaSeleccionada = usar.mazoJugador.get(numeroID);
+        CartaBlanca cartaActualMontana = usar.mazoMontana.peekFirst(); // Obtener la carta actual en la montaña
+
+        // Verificar si la carta seleccionada puede ser jugada
+        if (!puedeSerJugada(cartaSeleccionada, cartaActualMontana)) {
+            // Mostrar un mensaje de error o feedback al jugador, pero solo lo manda por consola
+            System.out.println("No puedes jugar esta carta.");
+            return;
+        }
+
+        // Proceder a descartar la carta
+        usarJugador.descartarCartasJugador(usar, numeroID);
+        HBOXJugador.getChildren().remove(cartaView);
+        actualizarIdsCartas(); // Actualizar los IDs después de eliminar una carta
+
+        if (cartaActual != null) {
+            HBOXMazo.getChildren().remove(cartaActual);
+        }
+        cartaActual = cartaView;
+        HBOXMazo.getChildren().add(cartaActual);
+        usar.mazoMontana.addFirst(cartaSeleccionada); // Añadir la carta a la pila
+
+        usarJugador.mostrarBarajaJugador(usar.mazoJugador);
+        System.out.println("Bandera " + numeroID);
+    }
+    private void descartarCarta(ImageView cartaView) {
+        int numeroID = Integer.parseInt(cartaView.getId());
+        CartaBlanca cartaSeleccionada = usar.mazoJugador.get(numeroID);
+        CartaBlanca cartaActualMontana = usar.mazoMontana.peekFirst();
+
+        if (!puedeSerJugada(cartaSeleccionada, cartaActualMontana)) {
+            System.out.println("No puedes jugar esta carta.");
+            return;
+        }
+
+        usarJugador.descartarCartasJugador(usar, numeroID);
+        HBOXJugador.getChildren().remove(cartaView);
+        actualizarIdsCartas();
+
+        if (cartaActual != null) {
+            HBOXMazo.getChildren().remove(cartaActual);
+        }
+        cartaActual = cartaView;
+        HBOXMazo.getChildren().add(cartaActual);
+        usar.mazoMontana.addFirst(cartaSeleccionada);
+
+        usarJugador.mostrarBarajaJugador(usar.mazoJugador);
+        System.out.println("Bandera " + numeroID);
+
+        // Si la carta jugada requiere que el rival tome dos cartas
+        if (cartaSeleccionada.getAccion() != null && cartaSeleccionada.getAccion().equals("T2")) {
+            tomaDosCartasRival();
+        }
     }
 
 
@@ -254,6 +322,34 @@ public class EscenaJuegoControlador {
         return nombre;
    }
 
+    private boolean puedeSerJugada(CartaBlanca cartaSeleccionada, CartaBlanca cartaActualMontana) {
+        if (cartaSeleccionada.getColor().equals(cartaActualMontana.getColor()) ||
+                (cartaSeleccionada.getAccion() != null && cartaSeleccionada.getAccion().equals(cartaActualMontana.getAccion())) ||
+                (cartaSeleccionada.getAccion() == null && cartaSeleccionada.getContadorCarta() == cartaActualMontana.getContadorCarta()) ||
+                (cartaSeleccionada instanceof CartaComodin)) {
+            return true;
+        }
+        return false;
+    }
+    @FXML
+    public void tomaDosCartasRival() {
+        int tomar = 0;
+
+        while (tomar != 2) {
+            CartaBlanca n2 = usar.mazo.get(0);
+            usar.mazoRival.add(n2);
+            usar.mazo.remove(n2);
+            tomar++;
+
+            // Crear el ImageView para la nueva carta del rival
+            ImageView nuevoImageView = new ImageView();
+            Image nuevaCarta = new Image(Objects.requireNonNull(getClass().getResourceAsStream("CartasUno/ReversoCarta.jpg")));
+            nuevoImageView.setImage(nuevaCarta);
+            nuevoImageView.setFitHeight(100);
+            nuevoImageView.setFitWidth(50);
+            HBOXRival.getChildren().add(nuevoImageView);
+        }
+    }
 
 
 
